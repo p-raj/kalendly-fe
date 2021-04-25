@@ -14,6 +14,9 @@ const tailwindcss_plugin = require("tailwindcss");
 const autoprefixer_plugin = require("autoprefixer");
 // COMMON CONFIG ########################################################
 
+// antd - replace moment with dayjs - https://ant.design/docs/react/replace-moment
+const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
+
 module.exports = {
     style: {
         modules: {
@@ -24,7 +27,6 @@ module.exports = {
         },
     },
     babel: {
-        presets: [],
         plugins: [
             "@babel/plugin-syntax-dynamic-import",
             "@babel/plugin-transform-react-jsx",
@@ -72,6 +74,7 @@ module.exports = {
                 depth: 8,
                 name: "debug.webpack.config.js",
             }),
+            new AntdDayjsWebpackPlugin(),
         ],
         configure: {
             entry: {
