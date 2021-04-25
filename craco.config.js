@@ -32,11 +32,37 @@ module.exports = {
             [
                 "import",
                 {
+                    libraryName: "antd",
+                    libraryDirectory: "es",
+                    style: false,
+                },
+                "antd",
+            ],
+            [
+                "import",
+                {
+                    libraryName: "@ant-design/icons",
+                    libraryDirectory: "es/icons",
+                    camel2DashComponentName: false,
+                },
+                "@ant-design/icons",
+            ],
+            [
+                "import",
+                {
                     libraryName: "lodash",
                     libraryDirectory: "",
                     camel2DashComponentName: false, // default: true
                 },
                 "lodash",
+            ],
+            [
+                "@babel/plugin-transform-react-jsx",
+                {
+                    pragma: "h",
+                    pragmaFrag: "Fragment",
+                },
+                "preact",
             ],
         ],
     },
