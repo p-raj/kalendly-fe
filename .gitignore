@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# anything starting with debug
+debug*
+# anything starting with exp
+exp*
+# anything starting with ____
+____*
