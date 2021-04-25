@@ -1,2 +1,0 @@
-# kalendly-fe
-Duh!

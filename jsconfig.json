@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "baseUrl": "src/",
+        "target": "es6",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "system",
+        "moduleResolution": "node",
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react",
+        "declaration": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "paths": {
+            "components/*": ["src/components/*"],
+            "modules/*": ["src/modules/*"],
+            "store/*": ["src/store/*"],
+            "assets/*": ["src/assets/*"]
+        }
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+}
