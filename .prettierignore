@@ -9,7 +9,11 @@ dist
 assets
 vendors
 *.dump
-____
+# anything starting with debug
+debug*
+# anything starting with exp
+exp*
+# anything starting with ____
 ____*
 node_modules
 .vscode
