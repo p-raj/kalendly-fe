@@ -16,7 +16,7 @@
   },
   "scripts": {
     "lint": "eslint src --ext js",
-    "format": "prettier --write \"./**\"",
+    "format": "prettier --write \"./**\" --config .prettierrc.json --ignore-path .prettierignore",
     "flow": "flow",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "run": "env-cmd --verbose -e development craco start",

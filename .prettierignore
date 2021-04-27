@@ -1,3 +1,6 @@
+public/favicon.ico
+public/robots.txt
+.flowconfig
 .gitignore
 .prettierignore
 yarn.lock
@@ -5,6 +8,7 @@ yarn-error.log
 package-lock.json
 LICENSE
 *.ejs
+build
 dist
 assets
 vendors
