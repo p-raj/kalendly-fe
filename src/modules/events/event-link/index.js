@@ -34,6 +34,7 @@ class EventLink extends Component {
         selectedSlot: null,
         showFullCalendar: false,
         preferredMeetingHours: null,
+        visitorsTz: Intl.DateTimeFormat().resolvedOptions().timeZone,
     };
 
     fetchData = (selectedDate) => {
@@ -140,10 +141,7 @@ class EventLink extends Component {
                         <Col span={24}>
                             <p>
                                 Your Timezone <br></br>
-                                {
-                                    Intl.DateTimeFormat().resolvedOptions()
-                                        .timeZone
-                                }
+                                {this.state.visitorsTz}
                             </p>
                         </Col>
                         <Col span={24}>
@@ -193,13 +191,21 @@ class EventLink extends Component {
                                             ? dayjs(item).format("LT")
                                             : "Confirm"}
                                     </Button>
-
-                                    <p className="text-xs">
-                                        Their Time:
-                                        {dayjs(item)
-                                            .tz(data.event.timezone)
-                                            .format("LLL")}
-                                    </p>
+                                    <div
+                                        className={
+                                            data.event.timezone ===
+                                            this.state.visitorsTz
+                                                ? "hidden"
+                                                : "block"
+                                        }
+                                    >
+                                        <p className="text-xs">
+                                            Their Time:
+                                            {dayjs(item)
+                                                .tz(data.event.timezone)
+                                                .format("LLL")}
+                                        </p>
+                                    </div>
                                 </div>
                             </List.Item>
                         )}
