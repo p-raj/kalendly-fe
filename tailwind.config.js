@@ -6,10 +6,4 @@ module.exports = {
         layers: ["components", "utilities"],
         content: ["./src/**/*.html", "./src/**/*.jsx", "./src/**/*.js"],
     },
-    darkMode: false, // or 'media' or 'class'
-    theme: {},
-    variants: {
-        extend: {},
-    },
-    plugins: [],
 };

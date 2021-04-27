@@ -12,7 +12,7 @@
     },
     "plugins": ["react"],
     "rules": {
-        "indent": ["error", 4],
+        "indent": ["error", 4, { "SwitchCase": 1 }],
         "quotes": [2, "double"],
         "comma-dangle": 0,
         "react/jsx-uses-vars": 1,

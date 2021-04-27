@@ -36,7 +36,7 @@ module.exports = {
                 {
                     libraryName: "antd",
                     libraryDirectory: "es",
-                    style: false,
+                    style: "css",
                 },
                 "antd",
             ],
