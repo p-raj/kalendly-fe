@@ -27,7 +27,12 @@ const PREFERRED_MEETING_HOURS = [
     { label: "Evening", value: EVENING_HOURS },
 ];
 
+const WAIT_TIME_BEFORE_API = 5 * 1000; //seconds
+
 class EventLink extends Component {
+    // used to capture the settimeout function
+    apiTimer = null;
+    // state
     state = {
         selectedDate: dayjs.utc(),
         availableSlots: [],
@@ -80,13 +85,29 @@ class EventLink extends Component {
     };
 
     onSlotSelect = (selectedSlot) => {
-        console.log(selectedSlot.utc().format());
         if (this.state.selectedSlot === selectedSlot) {
-            console.log("confirmed");
-        } else {
+            console.log("Cancelled");
+            if (this.apiTimer !== null) {
+                window.clearTimeout(this.apiTimer);
+            }
             this.setState({
-                selectedSlot: selectedSlot,
+                selectedSlot: null,
             });
+        } else {
+            this.setState(
+                {
+                    selectedSlot: selectedSlot,
+                },
+                () => {
+                    const selectedSlot = this.state.selectedSlot;
+                    if (this.apiTimer !== null) {
+                        window.clearTimeout(this.apiTimer);
+                    }
+                    this.apiTimer = window.setTimeout(() => {
+                        console.log(selectedSlot);
+                    }, WAIT_TIME_BEFORE_API);
+                }
+            );
         }
     };
 
@@ -178,11 +199,16 @@ class EventLink extends Component {
                             <List.Item>
                                 <div className="grid grid-rows-2 gap-y-1">
                                     <Button
-                                        type={
+                                        className={
                                             item === this.state.selectedSlot
-                                                ? "primary"
-                                                : "default"
+                                                ? "animate-setup-api-call"
+                                                : ""
                                         }
+                                        // type={
+                                        //     item === this.state.selectedSlot
+                                        //         ? "primary"
+                                        //         : "default"
+                                        // }
                                         block={true}
                                         onClick={() => this.onSlotSelect(item)}
                                     >

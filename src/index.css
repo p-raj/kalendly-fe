@@ -1,3 +1,7 @@
+:root {
+    --primary: #1890ff;
+}
+
 @tailwind components;
 @tailwind utilities;
 
@@ -12,7 +16,6 @@ body {
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #333 !important;
 }
 
 .no-copy {
@@ -22,24 +25,15 @@ body {
     user-select: none; /* Likely future */
 }
 
-.hoverEffect2:hover {
-    cursor: pointer;
-    color: #018ccf;
-    border: 1px solid #c8e6f4;
-}
-
-.slider {
-    z-index: 10;
-}
-
-.pull-bottom {
-    display: inline-block;
-    vertical-align: bottom;
-    float: none;
-}
-
-.tableContent {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Animation to show Loading on button */
+/* @primary-color: #1890ff; */
+.animate-setup-api-call {
+    background: linear-gradient(
+        to right,
+        var(--primary) 50%,
+        white 50%
+    ) !important;
+    background-size: 200% 100% !important;
+    background-position: right bottom !important;
+    transition: all 5s ease !important;
 }
