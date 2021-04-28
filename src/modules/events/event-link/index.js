@@ -65,6 +65,10 @@ class EventLink extends Component {
     // https://stackoverflow.com/questions/44480053/how-to-detect-if-screen-size-has-changed-to-mobile-in-react
     componentWillUnmount() {
         window.removeEventListener("resize", this.updateWindowDimensions);
+        // clearout any timers
+        if (this.apiTimer !== null) {
+            window.clearTimeout(this.apiTimer);
+        }
     }
     // https://stackoverflow.com/questions/44480053/how-to-detect-if-screen-size-has-changed-to-mobile-in-react
     updateWindowDimensions() {
