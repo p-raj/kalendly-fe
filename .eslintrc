@@ -12,7 +12,14 @@
     },
     "plugins": ["react"],
     "rules": {
-        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1,
+                "ignoredNodes": ["ConditionalExpression"]
+            }
+        ],
         "quotes": [2, "double"],
         "comma-dangle": 0,
         "react/jsx-uses-vars": 1,

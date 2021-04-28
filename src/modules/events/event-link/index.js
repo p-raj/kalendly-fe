@@ -27,7 +27,7 @@ const PREFERRED_MEETING_HOURS = [
     { label: "Evening", value: EVENING_HOURS },
 ];
 
-const WAIT_TIME_BEFORE_API = 5 * 1000; //seconds
+const WAIT_TIME_BEFORE_API_CALL = 5 * 1000; //seconds
 
 class EventLink extends Component {
     // used to capture the settimeout function
@@ -40,6 +40,7 @@ class EventLink extends Component {
         showFullCalendar: false,
         preferredMeetingHours: null,
         visitorsTz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        hasConfirmedMeeting: false,
     };
 
     fetchData = (selectedDate) => {
@@ -89,6 +90,9 @@ class EventLink extends Component {
     };
 
     onSlotSelect = (selectedSlot) => {
+        this.setState({
+            hasConfirmedMeeting: false,
+        });
         if (this.state.selectedSlot === selectedSlot) {
             console.log("Cancelled");
             if (this.apiTimer !== null) {
@@ -109,7 +113,10 @@ class EventLink extends Component {
                     }
                     this.apiTimer = window.setTimeout(() => {
                         console.log(selectedSlot);
-                    }, WAIT_TIME_BEFORE_API);
+                        this.setState({
+                            hasConfirmedMeeting: true,
+                        });
+                    }, WAIT_TIME_BEFORE_API_CALL);
                 }
             );
         }
@@ -214,12 +221,13 @@ class EventLink extends Component {
                                         //         : "default"
                                         // }
                                         block={true}
-                                        onClick={() => this.onSlotSelect(item)}
-                                    >
+                                        onClick={() => this.onSlotSelect(item)}>
                                         {/* TODO: learn about animations */}
                                         {item !== this.state.selectedSlot
                                             ? dayjs(item).format("LT")
-                                            : "Confirm"}
+                                            : this.state.hasConfirmedMeeting
+                                            ? "Confirmed"
+                                            : "Confirming"}
                                     </Button>
                                     <div
                                         className={
@@ -227,8 +235,7 @@ class EventLink extends Component {
                                             this.state.visitorsTz
                                                 ? "hidden"
                                                 : "block"
-                                        }
-                                    >
+                                        }>
                                         <p className="text-xs">
                                             Their Time:
                                             {dayjs(item)
