@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { BrowserRouter, Link, Switch } from "react-router-dom";
 
 import { Layout, Menu } from "antd";
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 
 class KalendlyLayout extends Component {
     renderNavLinks = () => {
@@ -33,10 +33,9 @@ class KalendlyLayout extends Component {
             <BrowserRouter>
                 <Layout>
                     <Header>{this.renderNavLinks()}</Header>
-                    <Content className={"py-10 px-14"}>
+                    <Content className={"py-10 px-14 h-screen"}>
                         {this.renderContents()}
                     </Content>
-                    <Footer></Footer>
                 </Layout>
             </BrowserRouter>
         );
