@@ -39,6 +39,3 @@ body {
 }
 
 /* ANTD Override */
-.ant-list-header {
-    padding: 0 !important;
-}

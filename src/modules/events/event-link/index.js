@@ -131,8 +131,9 @@ class EventLink extends Component {
     renderListHeader = () => {
         return (
             <>
-                <div className="mb-3">
+                <div className="w-full">
                     <Radio.Group
+                        className={"w-full"}
                         options={PREFERRED_MEETING_HOURS}
                         optionType="button"
                         onChange={this.onSettingPreferredMeetingHours}
@@ -161,30 +162,34 @@ class EventLink extends Component {
     // LIST RELATED PROPERTIES
     render() {
         return (
-            <Row>
-                <Col span={4}>
-                    <Row>
+            <Row gutter={{ xs: 0, md: 16 }}>
+                <Col xs={24} md={4}>
+                    <p>
                         <h1>{data.event.title}</h1>
+                    </p>
+                    <p>
                         <h3>{data.event.duration} minutes</h3>
-                        <p>{data.event.description}</p>
-                    </Row>
-                    <Row>
-                        <Col span={24}>
-                            <p>
-                                Your Timezone <br></br>
-                                {this.state.visitorsTz}
-                            </p>
-                        </Col>
-                        <Col span={24}>
-                            <p>
-                                Organizer&apos;s Timezone <br></br>
-                                {data.event.timezone}
-                            </p>
-                        </Col>
-                    </Row>
+                    </p>
+                    <p>{data.event.description}</p>
+
+                    <div
+                        className={
+                            data.event.timezone === this.state.visitorsTz
+                                ? "hidden"
+                                : "grid grid-flow-col grid-cols-2"
+                        }>
+                        <p>
+                            Your Timezone <br></br>
+                            {this.state.visitorsTz}
+                        </p>
+
+                        <p>
+                            Organizer&apos;s Timezone <br></br>
+                            {data.event.timezone}
+                        </p>
+                    </div>
                 </Col>
-                <Col span={1}>{/* DIVIDER */}</Col>
-                <Col xs={16} md={14}>
+                <Col xs={24} md={16} className={"px-4 bg-white"}>
                     <Calendar
                         fullscreen={this.state.showFullCalendar}
                         defaultValue={dayjs.utc()}
@@ -197,26 +202,26 @@ class EventLink extends Component {
                         ]}
                     />
                 </Col>
-                <Col span={1}>{/* DIVIDER */}</Col>
-                <Col xs={{ span: 24 }} md={{ span: 4 }}>
+
+                <Col
+                    xs={{ span: 24 }}
+                    md={{ span: 4 }}
+                    className={
+                        "max-h-screen overflow-x-hidden overscroll-y-auto bg-white px-4 md:my-0 my-4"
+                    }>
                     <List
                         itemLayout="horizontal"
                         dataSource={this.listDataSource()}
                         header={this.renderListHeader()}
                         renderItem={(item) => (
                             <List.Item>
-                                <div className="grid grid-rows-2 gap-y-1">
+                                <div className="w-full text-center">
                                     <Button
                                         className={
                                             item === this.state.selectedSlot
                                                 ? "animate-setup-api-call"
                                                 : ""
                                         }
-                                        // type={
-                                        //     item === this.state.selectedSlot
-                                        //         ? "primary"
-                                        //         : "default"
-                                        // }
                                         block={true}
                                         onClick={() => this.onSlotSelect(item)}>
                                         {/* TODO: learn about animations */}
@@ -233,11 +238,13 @@ class EventLink extends Component {
                                                 ? "hidden"
                                                 : "block"
                                         }>
-                                        <p className="text-xs">
-                                            Their Time:
-                                            {dayjs(item)
-                                                .tz(data.event.timezone)
-                                                .format("LLL")}
+                                        <p className="text-sm">
+                                            {"Their Time: "}
+                                            <b>
+                                                {dayjs(item)
+                                                    .tz(data.event.timezone)
+                                                    .format("LT")}
+                                            </b>
                                         </p>
                                     </div>
                                 </div>
