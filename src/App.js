@@ -1,13 +1,11 @@
 import React from "react";
 
-import EventLink from "modules/events/event-link/index";
+import KalendlyLayout from "components/layout";
+
+import { getNavLinks } from "router";
 
 function App() {
-    return (
-        <div className="App">
-            <EventLink />
-        </div>
-    );
+    return <KalendlyLayout fnNavLinks={getNavLinks} />;
 }
 
 export default App;

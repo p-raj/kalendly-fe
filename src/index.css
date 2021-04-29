@@ -37,3 +37,8 @@ body {
     background-position: right bottom !important;
     transition: all 5s ease !important;
 }
+
+/* ANTD Override */
+.ant-list-header {
+    padding: 0 !important;
+}

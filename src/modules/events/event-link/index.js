@@ -162,7 +162,6 @@ class EventLink extends Component {
     render() {
         return (
             <Row>
-                <Col span={1}>{/* DIVIDER */}</Col>
                 <Col span={4}>
                     <Row>
                         <h1>{data.event.title}</h1>
@@ -185,7 +184,7 @@ class EventLink extends Component {
                     </Row>
                 </Col>
                 <Col span={1}>{/* DIVIDER */}</Col>
-                <Col xs={16} md={12}>
+                <Col xs={16} md={14}>
                     <Calendar
                         fullscreen={this.state.showFullCalendar}
                         defaultValue={dayjs.utc()}
@@ -198,10 +197,8 @@ class EventLink extends Component {
                         ]}
                     />
                 </Col>
-                <Col xs={0} md={1}>
-                    {/* DIVIDER */}
-                </Col>
-                <Col xs={{ span: 20, offset: 2 }} md={{ span: 4, offset: 0 }}>
+                <Col span={1}>{/* DIVIDER */}</Col>
+                <Col xs={{ span: 24 }} md={{ span: 4 }}>
                     <List
                         itemLayout="horizontal"
                         dataSource={this.listDataSource()}
@@ -248,7 +245,6 @@ class EventLink extends Component {
                         )}
                     />
                 </Col>
-                <Col xs={0} md={1}></Col>
             </Row>
         );
     }
