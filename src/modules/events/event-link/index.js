@@ -203,6 +203,7 @@ class EventLink extends Component {
     };
     // LIST RELATED PROPERTIES
     render() {
+        console.log(this.props);
         return (
             <Row gutter={{ xs: 0, md: 16 }}>
                 <Col xs={24} md={4}>

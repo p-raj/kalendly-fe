@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { withRouter } from "react-router-dom";
-
 import KalendlyLayout from "components/layout";
 
 import { getNavLinks } from "router";
@@ -23,4 +21,4 @@ App.propTypes = {
     match: PropTypes.object,
 };
 
-export default withRouter(App);
+export default App;

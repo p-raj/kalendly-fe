@@ -1,66 +1,76 @@
 import React from "react";
-import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
+import {
+    Switch,
+    Route,
+    useRouteMatch,
+    useHistory,
+    useLocation,
+} from "react-router-dom";
 
 import EventLink from "modules/events/event-link";
 import EventLinkList from "modules/events/event-link-list";
 import EventConfirmation from "modules/events/event-confirm";
 
-export const NavRouter = (routerProps) => {
+const routerParams = () => {
+    const history = useHistory();
+    const location = useLocation();
+    const match = useRouteMatch();
+    return { history, location, match };
+};
+
+export const NavRouter = () => {
     return (
         <Switch>
             <Route path="/" exact>
-                <EventLinkList routerProps={{ ...routerProps }} />
+                <EventLinkList />
             </Route>
 
             <Route path="/events/">
-                <EventRouter routerProps={{ ...routerProps }} />
+                <EventRouter />
             </Route>
         </Switch>
     );
 };
 
-export const EventRouter = (routerProps) => {
-    console.log(useParams());
-    console.log(useRouteMatch());
-    let { path, url } = useRouteMatch();
+export const EventRouter = () => {
+    const { history, location, match } = routerParams();
+    const { path } = match;
     return (
         <Switch>
             <Route path={`${path}`} exact>
-                <EventLinkList routerProps={{ ...routerProps }} />
+                <EventLinkList routerProps={{ history, location, match }} />
             </Route>
 
             <Route path={`${path}:eventId/`}>
-                <EventLinkRouter routerProps={{ ...routerProps }} />
+                <EventLinkRouter />
             </Route>
         </Switch>
     );
 };
 
-export const EventLinkRouter = (routerProps) => {
-    console.log(useParams());
-    console.log(useRouteMatch());
-    let { path, url } = useRouteMatch();
+export const EventLinkRouter = () => {
+    const { history, location, match } = routerParams();
+    const { path } = match;
     return (
         <Switch>
             <Route path={`${path}/`} exact>
-                <EventLink routerProps={{ ...routerProps }} />
+                <EventLink routerProps={{ history, location, match }} />
             </Route>
 
             <Route path={`${path}awesome/:bookingId/`}>
-                <EventLinkConfirmRouter routerProps={{ ...routerProps }} />
+                <EventLinkConfirmRouter />
             </Route>
         </Switch>
     );
 };
 
-export const EventLinkConfirmRouter = (routerProps) => {
-    console.log(useParams());
-    console.log(useRouteMatch());
-    let { path, url } = useRouteMatch();
+export const EventLinkConfirmRouter = () => {
+    const { history, location, match } = routerParams();
+    const { path } = match;
     return (
         <Switch>
             <Route path={`${path}`} exact>
-                <EventConfirmation routerProps={{ ...routerProps }} />
+                <EventConfirmation routerProps={{ history, location, match }} />
             </Route>
         </Switch>
     );
