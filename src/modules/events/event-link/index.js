@@ -114,9 +114,12 @@ class EventLink extends Component {
                         this.setState(
                             {
                                 hasConfirmedMeeting: true,
+                                newBookingId: 1,
                             },
                             () => {
-                                this.props.routerProps.history.push("awesome");
+                                this.props.routerProps.history.push(
+                                    `awesome/${this.state.newBookingId}`
+                                );
                             }
                         );
                     }, WAIT_TIME_BEFORE_API_CALL);
