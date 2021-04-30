@@ -23,9 +23,9 @@ class KalendlyLayout extends Component {
         );
     };
 
-    renderContents = (routerProps) => {
+    renderContents = () => {
         const links = this.props.fnNavLinks();
-        return <Switch>{links.router(routerProps)}</Switch>;
+        return <Switch>{links.router()}</Switch>;
     };
 
     render() {
@@ -42,7 +42,6 @@ class KalendlyLayout extends Component {
 
 KalendlyLayout.propTypes = {
     fnNavLinks: PropTypes.func,
-    routerProps: PropTypes.object,
 };
 
 export default KalendlyLayout;
