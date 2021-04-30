@@ -118,7 +118,7 @@ class EventLink extends Component {
                             },
                             () => {
                                 this.props.routerProps.history.push(
-                                    `awesome/${this.state.newBookingId}`
+                                    `awesome/${this.state.newBookingId}/`
                                 );
                             }
                         );
