@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import dayjs from "dayjs";
 
-import { Row, Col, List, Button, Calendar, Radio } from "antd";
+import { Row, Col, List, Button, Calendar, Radio, Divider } from "antd";
 
 import data from "./data";
 import { getAvailableSlots } from "./utils";
@@ -213,9 +213,11 @@ class EventLink extends Component {
                     <h1>{data.event.title}</h1>
 
                     <h3>{data.event.duration} minutes</h3>
-
+                    {/* DIVIDER */}
+                    <Divider />
                     <p>{data.event.description}</p>
-
+                    {/* DIVIDER */}
+                    <Divider />
                     <div
                         className={
                             data.event.timezone === this.state.visitorsTz
