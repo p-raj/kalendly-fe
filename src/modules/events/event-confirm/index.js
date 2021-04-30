@@ -17,7 +17,19 @@ class EventConfirmation extends Component {
     state = {
         data: data.event,
         visitorsTz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        smallScreen: false,
     };
+
+    // https://stackoverflow.com/questions/44480053/how-to-detect-if-screen-size-has-changed-to-mobile-in-react
+    componentDidMount = () => {
+        window.addEventListener("resize", this.updateWindowDimensions());
+    };
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateWindowDimensions);
+    }
+    updateWindowDimensions() {
+        this.setState({ smallScreen: window.innerWidth < 768 });
+    }
 
     renderTime = (eventStart, eventEnd, hostTZ) => {
         const formatDate = (date, format, tz) => {
@@ -116,24 +128,46 @@ class EventConfirmation extends Component {
             status: "Availability Status",
         };
 
-        return (
-            <>
-                <h3>{headers.name}</h3>
-                <h3>{headers.email}</h3>
-                <h3>{headers.timezone}</h3>
-                <h3>{headers.status}</h3>
-                {guestList.map((guest) => {
-                    return (
-                        <>
-                            <div>{guest.name}</div>
-                            <div>{guest.email}</div>
-                            <div>{guest.timezone}</div>
-                            <div>{guest.status}</div>
-                        </>
-                    );
-                })}
-            </>
-        );
+        if (!this.state.smallScreen) {
+            return (
+                <div className="grid grid-cols-4 gap-4 px-16 py-10">
+                    <h3>{headers.name}</h3>
+                    <h3>{headers.email}</h3>
+                    <h3>{headers.timezone}</h3>
+                    <h3>{headers.status}</h3>
+                    {guestList.map((guest) => {
+                        return (
+                            <>
+                                <div>{guest.name}</div>
+                                <div>{guest.email}</div>
+                                <div>{guest.timezone}</div>
+                                <div>{guest.status}</div>
+                            </>
+                        );
+                    })}
+                </div>
+            );
+        } else {
+            return (
+                <div className="grid grid-cols-2 gap-4 px-4 py-4">
+                    {guestList.map((guest) => {
+                        return (
+                            <>
+                                <h3>{headers.name}</h3> <div>{guest.name}</div>
+                                <h3>{headers.email}</h3>{" "}
+                                <div>{guest.email}</div>
+                                <h3>{headers.timezone}</h3>{" "}
+                                <div>{guest.timezone}</div>
+                                <h3>{headers.status}</h3>
+                                <div>{guest.status}</div>
+                                <div className="w-full border-gray-100 border-0 border-b border-solid"></div>
+                                <div className="w-full border-gray-100 border-0 border-b border-solid"></div>
+                            </>
+                        );
+                    })}
+                </div>
+            );
+        }
     };
 
     render() {
@@ -158,12 +192,13 @@ class EventConfirmation extends Component {
                     {/* DIVIDER */}
                     <Divider />
                     {this.renderEventActions()}
+                    {/* DIVIDER */}
+                    <Divider />
                 </Col>
                 {/* Meeting Details */}
                 <Col xs={{ span: 24 }} md={{ span: 20 }} className={"bg-white"}>
-                    <div className="grid grid-cols-4 gap-4 px-16 py-10">
-                        {this.renderGuestDetails(this.state.data.guests)}
-                    </div>
+                    {this.renderGuestDetails(this.state.data.guests)}
+
                     {/* GUEST LIST | Name, Email | Timezone | Status */}
                 </Col>
             </Row>
