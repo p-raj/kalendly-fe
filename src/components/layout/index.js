@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { BrowserRouter, Link, Switch } from "react-router-dom";
+import { Link, Switch } from "react-router-dom";
 
 import { Layout, Menu } from "antd";
 const { Header, Content } = Layout;
@@ -23,27 +23,26 @@ class KalendlyLayout extends Component {
         );
     };
 
-    renderContents = () => {
+    renderContents = (routerProps) => {
         const links = this.props.fnNavLinks();
-        return <Switch>{links.router()}</Switch>;
+        return <Switch>{links.router(routerProps)}</Switch>;
     };
 
     render() {
         return (
-            <BrowserRouter>
-                <Layout>
-                    <Header>{this.renderNavLinks()}</Header>
-                    <Content className={"py-10 px-14 h-screen"}>
-                        {this.renderContents()}
-                    </Content>
-                </Layout>
-            </BrowserRouter>
+            <Layout>
+                <Header>{this.renderNavLinks()}</Header>
+                <Content className={"py-10 px-14 h-screen"}>
+                    {this.renderContents(this.props.routerProps)}
+                </Content>
+            </Layout>
         );
     }
 }
 
 KalendlyLayout.propTypes = {
     fnNavLinks: PropTypes.func,
+    routerProps: PropTypes.object,
 };
 
 export default KalendlyLayout;

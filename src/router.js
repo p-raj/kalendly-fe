@@ -5,20 +5,20 @@ import EventLink from "modules/events/event-link";
 import EventLinkList from "modules/events/event-link-list";
 import EventConfirmation from "modules/events/event-confirm";
 
-export const EventRouter = () => {
+export const EventRouter = (routerProps) => {
     return (
         <Switch>
             {/* Note how these two routes are ordered. The more specific
                 path="/contact/:id" comes before path="/contact" so that
                 route will render when viewing an individual contact */}
             <Route path="/events/:id/awesome">
-                <EventConfirmation />
+                <EventConfirmation routerProps={{ ...routerProps }} />
             </Route>
             <Route path="/events/:id">
-                <EventLink />
+                <EventLink routerProps={{ ...routerProps }} />
             </Route>
             <Route path="/events">
-                <EventLinkList />
+                <EventLinkList routerProps={{ ...routerProps }} />
             </Route>
 
             {/* If none of the previous routes render anything,
@@ -28,7 +28,7 @@ export const EventRouter = () => {
                 the URL because all URLs begin with a /. So that's
                 why we put this one last of all */}
             <Route path="/">
-                <EventLinkList />
+                <EventLinkList routerProps={{ ...routerProps }} />
             </Route>
         </Switch>
     );

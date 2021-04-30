@@ -107,15 +107,18 @@ class EventLink extends Component {
                     selectedSlot: selectedSlot,
                 },
                 () => {
-                    const selectedSlot = this.state.selectedSlot;
                     if (this.apiTimer !== null) {
                         window.clearTimeout(this.apiTimer);
                     }
                     this.apiTimer = window.setTimeout(() => {
-                        console.log(selectedSlot);
-                        this.setState({
-                            hasConfirmedMeeting: true,
-                        });
+                        this.setState(
+                            {
+                                hasConfirmedMeeting: true,
+                            },
+                            () => {
+                                this.props.routerProps.history.push("awesome");
+                            }
+                        );
                     }, WAIT_TIME_BEFORE_API_CALL);
                 }
             );
@@ -164,12 +167,10 @@ class EventLink extends Component {
         return (
             <Row gutter={{ xs: 0, md: 16 }}>
                 <Col xs={24} md={4}>
-                    <p>
-                        <h1>{data.event.title}</h1>
-                    </p>
-                    <p>
-                        <h3>{data.event.duration} minutes</h3>
-                    </p>
+                    <h1>{data.event.title}</h1>
+
+                    <h3>{data.event.duration} minutes</h3>
+
                     <p>{data.event.description}</p>
 
                     <div
@@ -258,7 +259,7 @@ class EventLink extends Component {
 }
 
 EventLink.propTypes = {
-    props: PropTypes.object,
+    routerProps: PropTypes.object,
 };
 
 export default EventLink;
