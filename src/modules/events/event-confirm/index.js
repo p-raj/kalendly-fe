@@ -120,6 +120,12 @@ class EventConfirmation extends Component {
         );
     };
 
+    renderDivider = () => {
+        return (
+            <div className="w-full border-gray-100 border-0 border-b border-solid"></div>
+        );
+    };
+
     renderGuestDetails = (guestList) => {
         const headers = {
             name: "Name",
@@ -135,6 +141,10 @@ class EventConfirmation extends Component {
                     <h3>{headers.email}</h3>
                     <h3>{headers.timezone}</h3>
                     <h3>{headers.status}</h3>
+                    {this.renderDivider()}
+                    {this.renderDivider()}
+                    {this.renderDivider()}
+                    {this.renderDivider()}
                     {guestList.map((guest) => {
                         return (
                             <>
@@ -160,8 +170,8 @@ class EventConfirmation extends Component {
                                 <div>{guest.timezone}</div>
                                 <h3>{headers.status}</h3>
                                 <div>{guest.status}</div>
-                                <div className="w-full border-gray-100 border-0 border-b border-solid"></div>
-                                <div className="w-full border-gray-100 border-0 border-b border-solid"></div>
+                                {this.renderDivider()}
+                                {this.renderDivider()}
                             </>
                         );
                     })}
