@@ -134,17 +134,56 @@ class EventLink extends Component {
     renderListHeader = () => {
         return (
             <>
-                <div className="w-full">
-                    <Radio.Group
-                        className={"w-full"}
-                        options={PREFERRED_MEETING_HOURS}
-                        optionType="button"
-                        onChange={this.onSettingPreferredMeetingHours}
-                        value={this.state.preferredMeetingHours}
-                    />
+                <Radio.Group
+                    options={PREFERRED_MEETING_HOURS}
+                    optionType="button"
+                    onChange={this.onSettingPreferredMeetingHours}
+                    value={this.state.preferredMeetingHours}
+                />
+
+                <div className="mt-5">
+                    {this.state.selectedDate.format("dddd, MMMM Do")}
                 </div>
-                <div>{this.state.selectedDate.format("dddd, MMMM Do")}</div>
             </>
+        );
+    };
+
+    renderListItem = (item) => {
+        return (
+            <List.Item>
+                <div className="w-full text-center">
+                    <Button
+                        className={
+                            item === this.state.selectedSlot
+                                ? "animate-setup-api-call"
+                                : ""
+                        }
+                        block={true}
+                        onClick={() => this.onSlotSelect(item)}>
+                        {/* TODO: learn about animations */}
+                        {item !== this.state.selectedSlot
+                            ? dayjs(item).format("LT")
+                            : this.state.hasConfirmedMeeting
+                            ? "Confirmed"
+                            : "Confirming"}
+                    </Button>
+                    <div
+                        className={
+                            data.event.timezone === this.state.visitorsTz
+                                ? "hidden"
+                                : "block"
+                        }>
+                        <p className="text-sm">
+                            {"Their Time: "}
+                            <b>
+                                {dayjs(item)
+                                    .tz(data.event.timezone)
+                                    .format("LT")}
+                            </b>
+                        </p>
+                    </div>
+                </div>
+            </List.Item>
         );
     };
 
@@ -207,50 +246,13 @@ class EventLink extends Component {
                 <Col
                     xs={{ span: 24 }}
                     md={{ span: 4 }}
-                    className={
-                        "max-h-screen overflow-x-hidden overscroll-y-auto bg-white px-4 md:my-0 my-4"
-                    }>
+                    className={"bg-white px-4 md:my-0 my-4"}>
                     <List
+                        id="slot-list"
                         itemLayout="horizontal"
                         dataSource={this.listDataSource()}
                         header={this.renderListHeader()}
-                        renderItem={(item) => (
-                            <List.Item>
-                                <div className="w-full text-center">
-                                    <Button
-                                        className={
-                                            item === this.state.selectedSlot
-                                                ? "animate-setup-api-call"
-                                                : ""
-                                        }
-                                        block={true}
-                                        onClick={() => this.onSlotSelect(item)}>
-                                        {/* TODO: learn about animations */}
-                                        {item !== this.state.selectedSlot
-                                            ? dayjs(item).format("LT")
-                                            : this.state.hasConfirmedMeeting
-                                            ? "Confirmed"
-                                            : "Confirming"}
-                                    </Button>
-                                    <div
-                                        className={
-                                            data.event.timezone ===
-                                            this.state.visitorsTz
-                                                ? "hidden"
-                                                : "block"
-                                        }>
-                                        <p className="text-sm">
-                                            {"Their Time: "}
-                                            <b>
-                                                {dayjs(item)
-                                                    .tz(data.event.timezone)
-                                                    .format("LT")}
-                                            </b>
-                                        </p>
-                                    </div>
-                                </div>
-                            </List.Item>
-                        )}
+                        renderItem={(item) => this.renderListItem(item)}
                     />
                 </Col>
             </Row>

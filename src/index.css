@@ -38,4 +38,23 @@ body {
     transition: all 5s ease !important;
 }
 
+.ant-layout-content {
+    min-height: 100vh !important;
+    height: 100%;
+    width: 100%;
+}
+
 /* ANTD Override */
+#slot-list .ant-list-header {
+    padding-top: 12px;
+    padding-bottom: 4px;
+}
+
+#slot-list .ant-list-item {
+    padding: 6px 0 0 0;
+}
+
+#slot-list .ant-spin-nested-loading {
+    max-height: 80vh;
+    overflow-y: auto;
+}

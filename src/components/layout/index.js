@@ -32,7 +32,7 @@ class KalendlyLayout extends Component {
         return (
             <Layout>
                 <Header>{this.renderNavLinks()}</Header>
-                <Content className={"py-10 px-14 h-screen"}>
+                <Content className={"py-10 px-14"}>
                     {this.renderContents(this.props.routerProps)}
                 </Content>
             </Layout>
