@@ -11,6 +11,8 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(localizedFormat);
 
+import { v4 as uuid } from "uuid";
+
 import data from "./data";
 
 class EventConfirmation extends Component {
@@ -122,7 +124,9 @@ class EventConfirmation extends Component {
 
     renderDivider = () => {
         return (
-            <div className="w-full border-gray-100 border-0 border-b border-solid"></div>
+            <div
+                key={uuid()}
+                className="w-full border-gray-100 border-0 border-b border-solid"></div>
         );
     };
 
@@ -137,21 +141,29 @@ class EventConfirmation extends Component {
         if (!this.state.smallScreen) {
             return (
                 <div className="grid grid-cols-4 gap-4 px-16 py-10">
-                    <h3>{headers.name}</h3>
-                    <h3>{headers.email}</h3>
-                    <h3>{headers.timezone}</h3>
-                    <h3>{headers.status}</h3>
+                    <h3 key="headers-name">{headers.name}</h3>
+                    <h3 key="headers-email">{headers.email}</h3>
+                    <h3 key="headers-timezone">{headers.timezone}</h3>
+                    <h3 key="headers-status">{headers.status}</h3>
                     {this.renderDivider()}
                     {this.renderDivider()}
                     {this.renderDivider()}
                     {this.renderDivider()}
-                    {guestList.map((guest) => {
+                    {guestList.map((guest, index) => {
                         return (
                             <>
-                                <div>{guest.name}</div>
-                                <div>{guest.email}</div>
-                                <div>{guest.timezone}</div>
-                                <div>{guest.status}</div>
+                                <div key={`${guest.name}-${index}`}>
+                                    {guest.name}
+                                </div>
+                                <div key={`${guest.email}-${index}`}>
+                                    {guest.email}
+                                </div>
+                                <div key={`${guest.timezone}-${index}`}>
+                                    {guest.timezone}
+                                </div>
+                                <div key={`${guest.status}-${index}`}>
+                                    {guest.status}
+                                </div>
                             </>
                         );
                     })}
@@ -160,16 +172,38 @@ class EventConfirmation extends Component {
         } else {
             return (
                 <div className="grid grid-cols-2 gap-4 px-4 py-4">
-                    {guestList.map((guest) => {
+                    {guestList.map((guest, index) => {
                         return (
                             <>
-                                <h3>{headers.name}</h3> <div>{guest.name}</div>
-                                <h3>{headers.email}</h3>{" "}
-                                <div>{guest.email}</div>
-                                <h3>{headers.timezone}</h3>{" "}
-                                <div>{guest.timezone}</div>
-                                <h3>{headers.status}</h3>
-                                <div>{guest.status}</div>
+                                {/* name */}
+                                <h3 key={`headers-name-${index}`}>
+                                    {headers.name}
+                                </h3>
+                                <div key={`${guest.name}-${index}`}>
+                                    {guest.name}
+                                </div>
+                                {/* email */}
+                                <h3 key={`headers-email-${index}`}>
+                                    {headers.email}
+                                </h3>
+                                <div key={`${guest.email}-${index}`}>
+                                    {guest.email}
+                                </div>
+                                {/* timezone */}
+                                <h3 key={`headers-timezone-${index}`}>
+                                    {headers.timezone}
+                                </h3>
+                                <div key={`${guest.timezone}-${index}`}>
+                                    {guest.timezone}
+                                </div>
+                                {/* status */}
+                                <h3 key={`headers-status-${index}`}>
+                                    {headers.status}
+                                </h3>
+                                <div key={`${guest.status}-${index}`}>
+                                    {guest.status}
+                                </div>
+                                {/* divider */}
                                 {this.renderDivider()}
                                 {this.renderDivider()}
                             </>
