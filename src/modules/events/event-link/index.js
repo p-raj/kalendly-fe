@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import ReactMarkdown from "react-markdown";
+
 import dayjs from "dayjs";
 
 import { Row, Col, List, Button, Calendar, Radio, Divider } from "antd";
@@ -217,7 +219,7 @@ class EventLink extends Component {
                     <h3>{data.event.duration} minutes</h3>
                     {/* DIVIDER */}
                     <Divider />
-                    <p>{data.event.description}</p>
+                    <ReactMarkdown>{data.event.description}</ReactMarkdown>
                     {/* DIVIDER */}
                     <Divider />
                     <div

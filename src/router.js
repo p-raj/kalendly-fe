@@ -10,6 +10,7 @@ import {
 import EventLink from "modules/events/event-link";
 import EventLinkList from "modules/events/event-link-list";
 import EventConfirmation from "modules/events/event-confirm";
+import EventConfig from "modules/events/event-config";
 
 const routerParams = () => {
     const history = useHistory();
@@ -56,6 +57,10 @@ export const EventLinkRouter = () => {
         <Switch>
             <Route path={`${path}/`} exact>
                 <EventLink routerProps={{ history, location, match }} />
+            </Route>
+
+            <Route path={`${path}my-way`} exact>
+                <EventConfig routerProps={{ history, location, match }} />
             </Route>
 
             <Route path={`${path}awesome/:bookingId/`}>

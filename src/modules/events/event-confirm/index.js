@@ -1,6 +1,6 @@
 // https://alampros.github.io/react-confetti/?path=/story/props-demos--knobs
 import React, { Component } from "react";
-
+import Markdown from "react-markdown";
 import { Row, Col, Button, Divider } from "antd";
 
 import dayjs from "dayjs";
@@ -110,7 +110,7 @@ class EventConfirmation extends Component {
     };
 
     renderEventDescription = (description) => {
-        return <p>{description}</p>;
+        return <Markdown>{description}</Markdown>;
     };
 
     renderEventActions = () => {
