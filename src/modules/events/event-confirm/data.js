@@ -5,6 +5,10 @@ const data = {
         description:
             "15 minutes meeting with Mr. X regarding the plantation of 1 trillion trees",
         timezone: "America/New_York",
+        location: {
+            title: "Google Meet",
+            link: "https://asd-asd-asd.google.com",
+        },
         duration: 15, // always in minutes
         meta: {},
         guests: [
