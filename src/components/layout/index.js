@@ -6,9 +6,9 @@ import { Link, Switch } from "react-router-dom";
 import { Layout, Menu } from "antd";
 const { Header, Content } = Layout;
 
-class KalendlyLayout extends Component {
-    renderNavLinks = () => {
-        const links = this.props.fnNavLinks();
+const KalendlyLayout = (props) => {
+    const renderNavLinks = () => {
+        const links = props.fnNavLinks();
         return (
             <Menu
                 theme={"dark"}
@@ -23,22 +23,20 @@ class KalendlyLayout extends Component {
         );
     };
 
-    renderContents = () => {
-        const links = this.props.fnNavLinks();
+    const renderContents = () => {
+        const links = props.fnNavLinks();
         return <Switch>{links.router()}</Switch>;
     };
 
-    render() {
+    {
         return (
             <Layout>
-                <Header>{this.renderNavLinks()}</Header>
-                <Content className={"py-10 px-14"}>
-                    {this.renderContents()}
-                </Content>
+                <Header>{renderNavLinks()}</Header>
+                <Content className={"py-10 px-14"}>{renderContents()}</Content>
             </Layout>
         );
     }
-}
+};
 
 KalendlyLayout.propTypes = {
     fnNavLinks: PropTypes.func,

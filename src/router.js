@@ -19,10 +19,12 @@ const routerParams = () => {
 };
 
 export const NavRouter = () => {
+    const { history, location, match } = routerParams();
+    console.log(history, location, match);
     return (
         <Switch>
             <Route path="/" exact>
-                <EventLinkList />
+                <EventLinkList routerProps={{ history, location, match }} />
             </Route>
 
             <Route path="/events/">

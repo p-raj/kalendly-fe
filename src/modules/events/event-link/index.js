@@ -47,7 +47,10 @@ class EventLink extends Component {
         const key = selectedDate.format("YYYY-MM-DD");
         const selectedDateData = data.dates[key];
         let calcAvailableSlots = this.state.availableSlots;
-        if (selectedDateData.status === AVAILABILITY_STATUS) {
+        if (
+            selectedDateData &&
+            selectedDateData.status === AVAILABILITY_STATUS
+        ) {
             const b = selectedDateData.availability.map((slot) =>
                 getAvailableSlots(slot[0], slot[1], data.event.duration)
             );
