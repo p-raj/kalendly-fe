@@ -18,38 +18,52 @@ class EventConfig extends Component {
     };
 
     renderTitle = (title) => {
-        return <Input value={title} />;
+        return (
+            <div>
+                <h3>{"Event Title"}</h3>
+                <Input value={title} />
+            </div>
+        );
     };
 
     renderEditor = (description) => {
         return (
-            <div className="bg-white">
-                <Editor />
+            <div>
+                <h3>{"Event Description"}</h3>
+                <Editor value={description} />
             </div>
         );
     };
 
     renderLocation = (location, index) => {
-        return <Input key={index} value={location.title} />;
+        return (
+            <div>
+                <h3>{"Event Location"}</h3>
+                <Input key={index} value={location.title} />
+            </div>
+        );
     };
 
     renderActions = () => {
         return (
-            <div className="grid grid-cols-5">
-                <div className="col-span-2">
-                    <Button type="link">Link to the Live Page</Button>
-                    <Input value={"link"} />
+            <>
+                <h3>{"Event Settings"}</h3>
+                <div className="grid grid-cols-5">
+                    <div className="col-span-2">
+                        <Button type="link">Link to the Live Page</Button>
+                        <Input value={"link"} />
+                    </div>
+                    {/* DIVIDER */}
+                    <div className="col-span-1 block h-full w-1/2 border-t-0 border-b-0 border-l-0 border-gray-300 border-r border-solid"></div>
+                    <div className="col-span-2">
+                        <p>Event Status</p>
+                        <Switch
+                            checkedChildren="Enabled"
+                            unCheckedChildren="Disabled"
+                        />
+                    </div>
                 </div>
-                {/* DIVIDER */}
-                <div className="col-span-1 block h-full w-1/2 border-t-0 border-b-0 border-l-0 border-gray-300 border-r border-solid"></div>
-                <div className="col-span-2">
-                    <p>Event Status</p>
-                    <Switch
-                        checkedChildren="Enabled"
-                        unCheckedChildren="Disabled"
-                    />
-                </div>
-            </div>
+            </>
         );
     };
 

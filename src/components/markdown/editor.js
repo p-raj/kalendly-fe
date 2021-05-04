@@ -1,11 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 import MDEditor from "@uiw/react-md-editor";
 
-export default function Editor() {
-    const [value, setValue] = React.useState("**Hello world!!!**");
+export default function Editor(props) {
+    const [value, setValue] = React.useState(props.value);
     return (
         <div className="container">
             <MDEditor value={value} onChange={setValue} />
         </div>
     );
 }
+
+Editor.propTypes = {
+    value: PropTypes.string,
+};

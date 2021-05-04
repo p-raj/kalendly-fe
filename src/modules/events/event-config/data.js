@@ -32,25 +32,29 @@ const data = {
             title: "Invitee Form",
             description: "Event Booking Details to be filled by the invitees",
             options: [],
+            status: "enabled",
         },
-        // {
-        //     id: 2,
-        //     title: "Workflows <WIP>",
-        //     description: "Automation for the event and event booking",
-        //     options: [],
-        // },
-        // {
-        //     id: 3,
-        //     title: "Confirmation Page <WIP>",
-        //     description: "Booking confirmation page for the invitees",
-        //     options: [],
-        // },
-        // {
-        //     id: 4,
-        //     title: "Payments <WIP>",
-        //     description: "Collect payments for event bookings",
-        //     options: [],
-        // },
+        {
+            id: 2,
+            title: "Workflows <WIP>",
+            description: "Automation for the event and event booking",
+            options: [],
+            status: "disabled",
+        },
+        {
+            id: 3,
+            title: "Confirmation Page <WIP>",
+            description: "Booking confirmation page for the invitees",
+            options: [],
+            status: "disabled",
+        },
+        {
+            id: 4,
+            title: "Payments <WIP>",
+            description: "Collect payments for event bookings",
+            options: [],
+            status: "disabled",
+        },
     ],
 };
 
