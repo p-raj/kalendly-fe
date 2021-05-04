@@ -110,7 +110,7 @@ class EventConfirmation extends Component {
     };
 
     renderEventDescription = (description) => {
-        return <Viewer source={description} />;
+        return <Viewer value={description} />;
     };
 
     renderEventActions = () => {
