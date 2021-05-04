@@ -4,11 +4,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { Card } from "antd";
-import {
-    EditOutlined,
-    EllipsisOutlined,
-    SettingOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, SettingOutlined, LinkOutlined } from "@ant-design/icons";
 
 import data from "./data";
 
@@ -25,22 +21,22 @@ class EventLinkList extends Component {
     renderEventList = () => {
         return this.state.eventList.map((event, index) => {
             return (
-                <Link
+                <Card
                     key={index}
-                    to={`${this.props.routerProps.match.url}${event.id}/`}>
-                    <Card
-                        key={index}
-                        actions={[
-                            <SettingOutlined key="setting" />,
-                            <EditOutlined key="edit" />,
-                            <EllipsisOutlined key="ellipsis" />,
-                        ]}>
-                        <Meta
-                            title={event.title}
-                            description={event.description}
-                        />
-                    </Card>
-                </Link>
+                    actions={[
+                        <Link
+                            key={index}
+                            to={`${this.props.routerProps.match.url}${event.id}/my-way/`}>
+                            <SettingOutlined key="setting" />
+                        </Link>,
+                        <Link
+                            key={index}
+                            to={`${this.props.routerProps.match.url}${event.id}/`}>
+                            <LinkOutlined key="edit" />
+                        </Link>,
+                    ]}>
+                    <Meta title={event.title} description={event.description} />
+                </Card>
             );
         });
     };
