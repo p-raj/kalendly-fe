@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Drawer, Row, Col, Divider, Input, Switch, Button, Card } from "antd";
 
 // TODO: move out to components
-import Editor from "components/markdown/editor";
+import { Editor } from "components/markdown";
 
 import data from "./data";
 

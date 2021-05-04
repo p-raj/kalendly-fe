@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import MDEditor from "@uiw/react-md-editor";
+import { Viewer } from "components/markdown";
 
 import dayjs from "dayjs";
 
@@ -218,7 +218,7 @@ class EventLink extends Component {
                     <h3>{data.event.duration} minutes</h3>
                     {/* DIVIDER */}
                     <Divider />
-                    <MDEditor.Markdown source={data.event.description} />
+                    <Viewer value={data.event.description} />
                     {/* DIVIDER */}
                     <Divider />
                     <div
