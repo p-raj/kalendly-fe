@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { Card } from "antd";
-import { EditOutlined, SettingOutlined, LinkOutlined } from "@ant-design/icons";
+import { SettingOutlined, LinkOutlined } from "@ant-design/icons";
 
 import data from "./data";
 
