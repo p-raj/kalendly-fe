@@ -35,12 +35,12 @@ class EventConfig extends Component {
         );
     };
 
-    renderLocation = (location, index) => {
+    renderLocation = (location) => {
         return (
-            <div key={index}>
+            <>
                 <h3>{"Event Location"}</h3>
                 <Input value={location.title} />
-            </div>
+            </>
         );
     };
 
@@ -162,8 +162,11 @@ class EventConfig extends Component {
                     <Divider />
                     {/* Location */}
                     {this.state.data.event.locations.plugins.map(
-                        (location, index) =>
-                            this.renderLocation(location, index)
+                        (location, index) => (
+                            <div key={index}>
+                                {this.renderLocation(location, index)}
+                            </div>
+                        )
                     )}
                     {/* DIVIDER */}
                     <Divider />
