@@ -11,7 +11,6 @@
     "dayjs": "^1.10.4",
     "draft-js": "^0.11.7",
     "preact": "^10.5.13",
-    "react-draft-wysiwyg": "^1.14.6",
     "react-markdown": "^6.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
