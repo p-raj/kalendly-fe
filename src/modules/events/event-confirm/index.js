@@ -1,6 +1,6 @@
 // https://alampros.github.io/react-confetti/?path=/story/props-demos--knobs
 import React, { Component } from "react";
-import Markdown from "react-markdown";
+import MDEditor from "@uiw/react-md-editor";
 import { Row, Col, Button, Divider } from "antd";
 
 import dayjs from "dayjs";
@@ -110,7 +110,7 @@ class EventConfirmation extends Component {
     };
 
     renderEventDescription = (description) => {
-        return <Markdown>{description}</Markdown>;
+        return <MDEditor.Markdown source={description} />;
     };
 
     renderEventActions = () => {

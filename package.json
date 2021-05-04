@@ -11,7 +11,6 @@
     "axios": "^0.21.1",
     "dayjs": "^1.10.4",
     "preact": "^10.5.13",
-    "react-markdown": "^6.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
