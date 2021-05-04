@@ -4,8 +4,15 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { Card } from "antd";
+import {
+    EditOutlined,
+    EllipsisOutlined,
+    SettingOutlined,
+} from "@ant-design/icons";
 
 import data from "./data";
+
+const { Meta } = Card;
 
 class EventLinkList extends Component {
     constructor(props) {
@@ -21,8 +28,17 @@ class EventLinkList extends Component {
                 <Link
                     key={index}
                     to={`${this.props.routerProps.match.url}${event.id}/`}>
-                    <Card title={event.title} key={index}>
-                        <p>{event.description}</p>
+                    <Card
+                        key={index}
+                        actions={[
+                            <SettingOutlined key="setting" />,
+                            <EditOutlined key="edit" />,
+                            <EllipsisOutlined key="ellipsis" />,
+                        ]}>
+                        <Meta
+                            title={event.title}
+                            description={event.description}
+                        />
                     </Card>
                 </Link>
             );

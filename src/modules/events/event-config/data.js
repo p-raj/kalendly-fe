@@ -6,11 +6,52 @@ const data = {
         duration: 15, // always in minutes
         meta: {},
         status: "enabled",
-        location: {
-            title: "In-person Meeting",
-            link: "https://goo.gl/maps/nBy7Lp7KXHu9Fmv59",
+        locations: {
+            plugins: [
+                {
+                    title: "In-person Meeting",
+                    link: "https://goo.gl/maps/nBy7Lp7KXHu9Fmv59",
+                    id: 1,
+                    options: [],
+                },
+            ],
         },
+        rules: [
+            {
+                id: 1,
+                title: "",
+                description: "",
+                value: "",
+            },
+        ],
     },
+    rules: [],
+    plugins: [
+        {
+            id: 1,
+            title: "Invitee Form",
+            description: "Event Booking Details to be filled by the invitees",
+            options: [],
+        },
+        // {
+        //     id: 2,
+        //     title: "Workflows <WIP>",
+        //     description: "Automation for the event and event booking",
+        //     options: [],
+        // },
+        // {
+        //     id: 3,
+        //     title: "Confirmation Page <WIP>",
+        //     description: "Booking confirmation page for the invitees",
+        //     options: [],
+        // },
+        // {
+        //     id: 4,
+        //     title: "Payments <WIP>",
+        //     description: "Collect payments for event bookings",
+        //     options: [],
+        // },
+    ],
 };
 
 export default data;

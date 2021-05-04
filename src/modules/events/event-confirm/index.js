@@ -115,9 +115,15 @@ class EventConfirmation extends Component {
 
     renderEventActions = () => {
         return (
-            <div className="grid grid-cols-1 grid-flow-row gap-2">
-                <Button>{"Reschedule"}</Button>
-                <Button>{"Cancel"}</Button>
+            <div className="grid grid-cols-5">
+                <div className="col-span-2">
+                    <Button block>{"Reschedule"}</Button>
+                </div>
+                {/* DIVIDER */}
+                <div className="col-span-1 block h-full w-1/2 border-t-0 border-b-0 border-l-0 border-gray-300 border-r border-solid"></div>
+                <div className="col-span-2">
+                    <Button block>{"Cancel"}</Button>
+                </div>
             </div>
         );
     };
@@ -126,7 +132,7 @@ class EventConfirmation extends Component {
         return (
             <div
                 key={uuid()}
-                className="w-full border-gray-100 border-0 border-b border-solid"></div>
+                className="w-full border-gray-200 border-0 border-b border-solid"></div>
         );
     };
 
@@ -221,7 +227,7 @@ class EventConfirmation extends Component {
                     <h1>{this.state.data.title}</h1>
                 </Col>
                 {/* General Details */}
-                <Col xs={{ span: 24 }} md={{ span: 4 }}>
+                <Col xs={{ span: 24 }} md={{ span: 8 }}>
                     {/* Event Time */}
                     {this.renderTime(
                         this.state.data.dates.start,
@@ -240,7 +246,7 @@ class EventConfirmation extends Component {
                     <Divider />
                 </Col>
                 {/* Meeting Details */}
-                <Col xs={{ span: 24 }} md={{ span: 20 }} className={"bg-white"}>
+                <Col xs={{ span: 24 }} md={{ span: 16 }} className={"bg-white"}>
                     {this.renderGuestDetails(this.state.data.guests)}
 
                     {/* GUEST LIST | Name, Email | Timezone | Status */}

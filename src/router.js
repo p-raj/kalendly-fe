@@ -59,11 +59,19 @@ export const EventLinkRouter = () => {
                 <EventLink routerProps={{ history, location, match }} />
             </Route>
 
-            <Route path={`${path}my-way`} exact>
+            <Route path={`${path}my-way/`} exact>
+                <EventConfig routerProps={{ history, location, match }} />
+            </Route>
+            {/* boring */}
+            <Route path={`${path}config/`} exact>
                 <EventConfig routerProps={{ history, location, match }} />
             </Route>
 
             <Route path={`${path}awesome/:bookingId/`}>
+                <EventLinkConfirmRouter />
+            </Route>
+            {/* boring */}
+            <Route path={`${path}confirm/:bookingId/`}>
                 <EventLinkConfirmRouter />
             </Route>
         </Switch>
