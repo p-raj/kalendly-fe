@@ -37,9 +37,9 @@ class EventConfig extends Component {
 
     renderLocation = (location, index) => {
         return (
-            <div>
+            <div key={index}>
                 <h3>{"Event Location"}</h3>
-                <Input key={index} value={location.title} />
+                <Input value={location.title} />
             </div>
         );
     };
@@ -78,7 +78,7 @@ class EventConfig extends Component {
 
     renderConfigCard = (id, title, description, options) => {
         return (
-            <div key={id}>
+            <>
                 <Card
                     title={title}
                     extra={
@@ -94,7 +94,7 @@ class EventConfig extends Component {
                 </Card>
                 {/* DIVIDER */}
                 <Divider />
-            </div>
+            </>
         );
     };
 
@@ -108,14 +108,16 @@ class EventConfig extends Component {
     };
 
     renderPlugins = (plugins) => {
-        return plugins.map((plugin) =>
-            this.renderConfigCard(
-                plugin.id,
-                plugin.title,
-                plugin.description,
-                plugin.options
-            )
-        );
+        return plugins.map((plugin, index) => (
+            <div key={index}>
+                {this.renderConfigCard(
+                    plugin.id,
+                    plugin.title,
+                    plugin.description,
+                    plugin.options
+                )}
+            </div>
+        ));
     };
 
     // DRAWER
