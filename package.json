@@ -9,6 +9,7 @@
     "@uiw/react-md-editor": "^3.0.3",
     "antd": "^4.15.2",
     "axios": "^0.21.1",
+    "craco-less": "^1.17.1",
     "dayjs": "^1.10.4",
     "preact": "^10.5.13",
     "react-router-dom": "^5.2.0",

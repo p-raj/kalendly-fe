@@ -14,7 +14,7 @@ assets
 vendors
 *.dump
 # anything starting with debug
-debug*
+# debug*
 # anything starting with exp
 exp*
 # anything starting with ____

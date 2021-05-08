@@ -12,6 +12,6 @@
   "prettier.tabWidth": 4,
   "prettier.semi": true,
   "prettier.singleQuote": false,
-  "prettier.jsxBracketSameLine": false,
-  "prettier.useTabs": false
+  "prettier.jsxBracketSameLine": true,
+  "prettier.useTabs": false,
 }

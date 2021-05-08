@@ -16,6 +16,8 @@ const autoprefixer_plugin = require("autoprefixer");
 
 // antd - replace moment with dayjs - https://ant.design/docs/react/replace-moment
 const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
+const CracoLessPlugin = require("craco-less");
+const { getThemeVariables } = require("antd/dist/theme");
 
 module.exports = {
     style: {
@@ -36,7 +38,7 @@ module.exports = {
                 {
                     libraryName: "antd",
                     libraryDirectory: "es",
-                    style: "css",
+                    style: true,
                 },
                 "antd",
             ],
@@ -100,5 +102,20 @@ module.exports = {
         },
     },
     // craco config override
-    plugins: [],
+    plugins: [
+        {
+            plugin: CracoLessPlugin,
+            options: {
+                lessLoaderOptions: {
+                    lessOptions: {
+                        modifyVars: getThemeVariables({
+                            dark: false, // Enable dark mode
+                            compact: false,
+                        }),
+                        javascriptEnabled: true,
+                    },
+                },
+            },
+        },
+    ],
 };
