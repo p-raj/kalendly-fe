@@ -40,7 +40,8 @@ class EventLink extends Component {
         availableSlots: [],
         selectedSlot: null,
         showFullCalendar: false,
-        preferredMeetingHours: null,
+        preferredMeetingHours:
+            dayjs().hour() < 12 ? MORNING_HOURS : EVENING_HOURS,
         visitorsTz: Intl.DateTimeFormat().resolvedOptions().timeZone,
         hasConfirmedMeeting: false,
     };
@@ -213,7 +214,7 @@ class EventLink extends Component {
     render() {
         return (
             <Row gutter={{ xs: 0, md: 16 }}>
-                <Col xs={24} md={4}>
+                <Col xs={{ span: 24 }} md={{ span: 10 }}>
                     <h1>{data.event.title}</h1>
                     <h3>{data.event.duration} minutes</h3>
                     {/* DIVIDER */}
@@ -238,7 +239,11 @@ class EventLink extends Component {
                         </p>
                     </div>
                 </Col>
-                <Col xs={24} md={16} className={"px-4 bg-white"}>
+                <Col
+                    xs={24}
+                    md={14}
+                    className={"px-4 bg-white"}
+                    id="calendar-container">
                     <Calendar
                         fullscreen={this.state.showFullCalendar}
                         defaultValue={dayjs.utc()}
@@ -250,19 +255,26 @@ class EventLink extends Component {
                             dayjs.utc().endOf("month"),
                         ]}
                     />
-                </Col>
-
-                <Col
-                    xs={{ span: 24 }}
-                    md={{ span: 4 }}
-                    className={"bg-white px-4 md:my-0 my-4"}>
-                    <List
-                        id="slot-list"
-                        itemLayout="horizontal"
-                        dataSource={this.listDataSource()}
-                        header={this.renderListHeader()}
-                        renderItem={(item) => this.renderListItem(item)}
-                    />
+                    <Divider></Divider>
+                    <Row>
+                        <Col span={24} className={"bg-white px-4 md:my-0 my-4"}>
+                            <List
+                                grid={{
+                                    gutter: 16,
+                                    xs: 1,
+                                    sm: 2,
+                                    md: 4,
+                                    lg: 4,
+                                    xl: 6,
+                                }}
+                                id="slot-list"
+                                itemLayout="horizontal"
+                                dataSource={this.listDataSource()}
+                                header={this.renderListHeader()}
+                                renderItem={(item) => this.renderListItem(item)}
+                            />
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
         );

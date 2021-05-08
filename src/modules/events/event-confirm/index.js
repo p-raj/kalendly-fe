@@ -56,18 +56,20 @@ class EventConfirmation extends Component {
             dateFormat
         ) => {
             return (
-                <>
-                    <div>{this.state.visitorsTz}</div>
-                    <h4 className={"mb-0"}>
-                        {formatDate(eventStart, dateFormat)}
-                    </h4>
-                    <h3>
-                        {formatTime(eventStart, timeFormat)}-
-                        {formatTime(eventEnd, timeFormat)}
-                    </h3>
+                <div className="grid grid-cols-2">
+                    <div>
+                        {this.state.visitorsTz}
+                        <h4 className={"mb-0"}>
+                            {formatDate(eventStart, dateFormat)}
+                        </h4>
+                        <h3>
+                            {formatTime(eventStart, timeFormat)}-
+                            {formatTime(eventEnd, timeFormat)}
+                        </h3>
+                    </div>
                     {hostTZ !== this.state.visitorsTz ? (
-                        <>
-                            <h3>Organizer&apos;s Time:</h3>
+                        <div>
+                            Organizer&apos;s Time:
                             <div>{hostTZ}</div>
                             <h4 className={"m-0"}>
                                 {formatDate(eventStart, dateFormat, hostTZ)}
@@ -76,9 +78,9 @@ class EventConfirmation extends Component {
                                 {formatTime(eventStart, timeFormat, hostTZ)}-
                                 {formatTime(eventEnd, timeFormat, hostTZ)}
                             </h3>
-                        </>
+                        </div>
                     ) : null}
-                </>
+                </div>
             );
         };
 
@@ -205,7 +207,7 @@ class EventConfirmation extends Component {
                     <h1>{this.state.data.title}</h1>
                 </Col>
                 {/* General Details */}
-                <Col xs={{ span: 24 }} md={{ span: 8 }}>
+                <Col xs={{ span: 24 }} md={{ span: 10 }}>
                     {/* Event Time */}
                     {this.renderTime(
                         this.state.data.dates.start,
@@ -224,7 +226,7 @@ class EventConfirmation extends Component {
                     <Divider />
                 </Col>
                 {/* Meeting Details */}
-                <Col xs={{ span: 24 }} md={{ span: 16 }} className={"bg-white"}>
+                <Col xs={{ span: 24 }} md={{ span: 14 }} className={"bg-white"}>
                     {this.renderGuestDetails(this.state.data.guests)}
 
                     {/* GUEST LIST | Name, Email | Timezone | Status */}

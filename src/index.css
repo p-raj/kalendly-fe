@@ -58,3 +58,8 @@ body {
     max-height: 80vh;
     overflow-y: auto;
 }
+
+/* Calendar CSS Props */
+#calendar-container .ant-picker-calendar-date-content {
+    height: auto;
+}

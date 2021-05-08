@@ -6,6 +6,7 @@
     "editor.formatOnSave": true
   },
   "prettier.configPath": ".prettierrc.json",
+  "prettier.ignorePath": ".prettierignore",
   "prettier.requireConfig": true,
   "prettier.trailingComma": "es5",
   "prettier.tabWidth": 4,
