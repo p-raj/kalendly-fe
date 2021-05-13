@@ -1,11 +1,27 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-import { Drawer, Row, Col, Divider, Input, Switch, Button, Card } from "antd";
+import {
+    Drawer,
+    Row,
+    Col,
+    Divider,
+    Input,
+    Switch,
+    Button,
+    Card,
+    Select,
+} from "antd";
 
-// TODO: move out to components
+import { EditOutlined } from "@ant-design/icons";
+
 import { Editor } from "components/markdown";
 
 import data from "./data";
+import chooseElement from "components/form";
+
+const { Option } = Select;
 
 class EventConfig extends Component {
     state = {
@@ -44,22 +60,59 @@ class EventConfig extends Component {
         );
     };
 
+    // TODO: move to a dedicated component
+    onMeetingDurationChange = (e) => {
+        console.log(e);
+        const data = this.state.data;
+        const event = data.event;
+        this.setState({
+            data: { ...data, event: { ...event, duration: e } },
+        });
+    };
+
     renderActions = () => {
+        const options = (
+            <>
+                <Option value={15}>15 Minutes</Option>
+                <Option value={30}>30 Minutes</Option>
+                <Option value={45}>45 Minutes</Option>
+                <Option value={60}>60 Minutes</Option>
+                <Option value={null} disabled>
+                    Custom Duration
+                </Option>
+            </>
+        );
         return (
             <>
                 <h3>{"Event Settings"}</h3>
                 <div className="grid grid-cols-5">
                     <div className="col-span-2">
-                        <Button type="link">Link to the Live Page</Button>
-                        <Input value={"link"} />
+                        <Select
+                            className={"w-full"}
+                            onChange={this.onMeetingDurationChange}
+                            defaultActiveFirstOption>
+                            {options}
+                        </Select>
+                        <p></p>
+                        <p>Event Duration: {this.state.data.event.duration}</p>
                     </div>
                     {/* DIVIDER */}
                     <div className="col-span-1 block h-full w-1/2 border-t-0 border-b-0 border-l-0 border-gray-300 border-r border-solid"></div>
                     <div className="col-span-2">
+                        <p>
+                            {/* Event Link - ToDo */}
+                            {/*<Input placeholder={"link"} defaultValue={"Meet Me"} /> */}
+                            <Link
+                                to={`${this.props.routerProps.match.url}/`}
+                                target="_blank">
+                                {"Open Live Page"}
+                            </Link>
+                        </p>
                         <p>Event Status</p>
                         <Switch
                             checkedChildren="Enabled"
                             unCheckedChildren="Disabled"
+                            checked
                         />
                     </div>
                 </div>
@@ -71,24 +124,32 @@ class EventConfig extends Component {
         return options.map((option, index) => (
             <div key={index}>
                 {option.title}
-                <Input value={option.value} />
+                {chooseElement(option.type, option)}
+                <Divider />
             </div>
         ));
     };
 
-    renderConfigCard = (id, title, description, options) => {
+    renderConfigCard = (id, title, description, options, status) => {
         return (
             <>
                 <Card
                     title={title}
                     extra={
-                        <Button
-                            type={"link"}
-                            onClick={() =>
-                                this.onBeforeConfigDrawerOpen(title, options)
-                            }>
-                            {"View & Edit"}
-                        </Button>
+                        status === "enabled" ? (
+                            <Button
+                                type={"link"}
+                                onClick={() =>
+                                    this.onBeforeConfigDrawerOpen(
+                                        title,
+                                        options
+                                    )
+                                }>
+                                <EditOutlined />
+                            </Button>
+                        ) : (
+                            "WIP"
+                        )
                     }>
                     <p>{description}</p>
                 </Card>
@@ -103,7 +164,8 @@ class EventConfig extends Component {
             "rules",
             "Booking Rules",
             "Rules for the booking",
-            rules
+            rules,
+            "enabled"
         );
     };
 
@@ -114,7 +176,8 @@ class EventConfig extends Component {
                     plugin.id,
                     plugin.title,
                     plugin.description,
-                    plugin.options
+                    plugin.options,
+                    plugin.status
                 )}
             </div>
         ));
@@ -184,7 +247,17 @@ class EventConfig extends Component {
                     {/* Config Drawer */}
                     <Drawer
                         title={this.state.configDrawer.title}
-                        placement={"bottom"}
+                        placement={window.innerWidth < 768 ? "bottom" : "right"}
+                        width={
+                            window.innerWidth > 480
+                                ? window.innerWidth * 0.5
+                                : window.innerWidth
+                        }
+                        height={
+                            window.innerWidth > 480
+                                ? window.innerHeight
+                                : window.innerHeight * 0.9
+                        }
                         closable={true}
                         onClose={this.onConfigDrawerClose}
                         visible={this.state.configDrawer.visible}>
@@ -197,5 +270,9 @@ class EventConfig extends Component {
         );
     }
 }
+
+EventConfig.propTypes = {
+    routerProps: PropTypes.object,
+};
 
 export default EventConfig;
