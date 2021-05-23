@@ -29,7 +29,7 @@ class EventConfig extends Component {
         configDrawer: {
             visible: false,
             title: "",
-            options: [],
+            elements: [],
         },
     };
 
@@ -62,7 +62,6 @@ class EventConfig extends Component {
 
     // TODO: move to a dedicated component
     onMeetingDurationChange = (e) => {
-        console.log(e);
         const data = this.state.data;
         const event = data.event;
         this.setState({
@@ -120,11 +119,12 @@ class EventConfig extends Component {
         );
     };
 
-    renderConfigOptions = (options) => {
-        return options.map((option, index) => (
+    renderConfigElements = (elements) => {
+        console.log(elements);
+        return elements.map((element, index) => (
             <div key={index}>
-                {option.title}
-                {chooseElement(option.type, option)}
+                {element.title}
+                {chooseElement(element.type, element)}
                 <Divider />
             </div>
         ));
@@ -184,12 +184,12 @@ class EventConfig extends Component {
     };
 
     // DRAWER
-    onBeforeConfigDrawerOpen = (title, options) => {
+    onBeforeConfigDrawerOpen = (title, elements) => {
         this.setState(
             {
                 configDrawer: {
                     title: title,
-                    options: options,
+                    elements: elements,
                 },
             },
             () => {
@@ -205,7 +205,7 @@ class EventConfig extends Component {
             configDrawer: {
                 visible: false,
                 title: "",
-                options: [],
+                elements: [],
             },
         });
     };
@@ -261,8 +261,8 @@ class EventConfig extends Component {
                         closable={true}
                         onClose={this.onConfigDrawerClose}
                         visible={this.state.configDrawer.visible}>
-                        {this.renderConfigOptions(
-                            this.state.configDrawer.options
+                        {this.renderConfigElements(
+                            this.state.configDrawer.elements
                         )}
                     </Drawer>
                 </Col>

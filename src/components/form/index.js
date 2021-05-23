@@ -5,8 +5,18 @@ import PropTypes from "prop-types";
 import { Input, Radio, Row, Col } from "antd";
 const { TextArea } = Input;
 
+import Select from "./select";
+
 const chooseElement = (elementType, elementOptions) => {
-    const { id, value, description } = elementOptions;
+    const {
+        id,
+        value,
+        description,
+        status,
+        options,
+        validations,
+    } = elementOptions;
+
     let returnElement = <></>;
 
     switch (elementType) {
@@ -32,6 +42,18 @@ const chooseElement = (elementType, elementOptions) => {
             break;
         case "radio":
             returnElement = <Radio.Group optionType="button" />;
+            break;
+        case "select":
+            console.log("CHOOSE | SELECT | ", options);
+            returnElement = (
+                <Select
+                    status={status}
+                    id={id}
+                    options={options}
+                    value={value}
+                    validations={validations}
+                />
+            );
             break;
         default:
             returnElement = <>{"Not Supported"}</>;
