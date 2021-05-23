@@ -12,7 +12,7 @@ const runRule = (rule, pattern, value) => {
     let isValid = true;
     switch (rule) {
         case "required":
-            isValid &= pattern && value !== null && value !== undefined;
+            isValid &= (value !== null && value !== undefined) || !pattern;
             break;
         case "regex":
             const re = new RegExp(pattern);
