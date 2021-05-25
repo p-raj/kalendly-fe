@@ -11,6 +11,8 @@ import EventLink from "modules/events/event-link";
 import EventLinkList from "modules/events/event-link-list";
 import EventConfirmation from "modules/events/event-confirm";
 import EventConfig from "modules/events/event-config";
+import Home from "modules/home";
+import Login from "modules/auth";
 
 const routerParams = () => {
     const history = useHistory();
@@ -24,7 +26,11 @@ export const NavRouter = () => {
     return (
         <Switch>
             <Route path="/" exact>
-                <EventLinkList routerProps={{ history, location, match }} />
+                <Home routerProps={{ history, location, match }} />
+            </Route>
+
+            <Route path="/auth/">
+                <Login routerProps={{ history, location, match }} />
             </Route>
 
             <Route path="/events/">

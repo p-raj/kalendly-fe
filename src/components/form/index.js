@@ -44,7 +44,6 @@ const chooseElement = (elementType, elementOptions) => {
             returnElement = <Radio.Group optionType="button" />;
             break;
         case "select":
-            console.log("CHOOSE | SELECT | ", options);
             returnElement = (
                 <Select
                     status={status}

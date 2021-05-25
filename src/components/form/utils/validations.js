@@ -24,6 +24,12 @@ const runRule = (rule, pattern, value) => {
         case "gte":
             isValid &= value >= pattern;
             break;
+        case "lt":
+            isValid &= value < pattern;
+            break;
+        case "lte":
+            isValid &= value <= pattern;
+            break;
         default:
             isValid = false;
             break;

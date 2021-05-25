@@ -16,6 +16,7 @@ body {
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
 }
 
 .no-copy {
@@ -23,6 +24,47 @@ body {
     -moz-user-select: none; /* Firefox all */
     -ms-user-select: none; /* IE 10+ */
     user-select: none; /* Likely future */
+}
+
+@layer components {
+    .hmax {
+        @apply h-screen min-h-full;
+    }
+}
+
+/* Base Setup */
+#layout {
+    @apply hmax overflow-hidden;
+}
+
+#header {
+    @apply sticky top-0 z-10;
+}
+
+#content {
+    @apply hmax overflow-auto p-14 z-0 flex;
+}
+
+/* Event Link Page */
+
+/* ANTD Override */
+#event-link-slot-list .ant-list-header {
+    padding-top: 12px;
+    padding-bottom: 4px;
+}
+
+#event-link-slot-list .ant-list-item {
+    padding: 6px 0 0 0;
+}
+
+#event-link-slot-list .ant-spin-nested-loading {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Calendar on the link page - CSS Props */
+#event-link-calendar-container .ant-picker-calendar-date-content {
+    @apply px-2 md:px-4 bg-white h-auto;
 }
 
 /* Animation to show Loading on button */
@@ -36,30 +78,4 @@ body {
     background-size: 200% 100% !important;
     background-position: right bottom !important;
     transition: all 5s ease !important;
-}
-
-.ant-layout-content {
-    min-height: 100vh !important;
-    height: 100%;
-    width: 100%;
-}
-
-/* ANTD Override */
-#slot-list .ant-list-header {
-    padding-top: 12px;
-    padding-bottom: 4px;
-}
-
-#slot-list .ant-list-item {
-    padding: 6px 0 0 0;
-}
-
-#slot-list .ant-spin-nested-loading {
-    max-height: 80vh;
-    overflow-y: auto;
-}
-
-/* Calendar CSS Props */
-#calendar-container .ant-picker-calendar-date-content {
-    height: auto;
 }

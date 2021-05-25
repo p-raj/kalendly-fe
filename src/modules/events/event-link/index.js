@@ -239,11 +239,7 @@ class EventLink extends Component {
                         </p>
                     </div>
                 </Col>
-                <Col
-                    xs={24}
-                    md={14}
-                    className={"px-4 bg-white"}
-                    id="calendar-container">
+                <Col xs={24} md={14} id="event-link-calendar-container">
                     <Calendar
                         fullscreen={this.state.showFullCalendar}
                         defaultValue={dayjs.utc()}
@@ -267,7 +263,7 @@ class EventLink extends Component {
                                     lg: 4,
                                     xl: 6,
                                 }}
-                                id="slot-list"
+                                id="event-link-slot-list"
                                 itemLayout="horizontal"
                                 dataSource={this.listDataSource()}
                                 header={this.renderListHeader()}
