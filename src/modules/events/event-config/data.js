@@ -161,85 +161,15 @@ const data = {
             title: "Invitee Form",
             module: "invitee-form",
             description: "Event Booking Details to be filled by the invitees",
-            options: [
-                {
-                    id: 1,
-                    title: "Invitees Can Schedule, days in future",
-                    description:
-                        "Set a range of dates when you can accept meetings.",
-                    value: "1",
-                    type: "input",
-                    enabled: true,
-                },
-                {
-                    id: 2,
-                    title: "Your Availability Schedule",
-                    description:
-                        "Setup your availability schedule for the invitees to be able to book a meeting with you in your preferred schedule",
-                    value: "1",
-                    type: "input",
-                    enabled: true,
-                },
-                {
-                    id: 3,
-                    title: "Buffer Time before events",
-                    description: "Time to prepare for the booked events.",
-                    value: "1",
-                    type: "input",
-                    status: "disabled",
-                },
-                {
-                    id: 4,
-                    title: "Buffer Time after events",
-                    description: "Time to wrap-up after the booked events.",
-                    value: "1",
-                    type: "input",
-                    status: "disabled",
-                },
-            ],
+            options: [],
             enabled: true,
         },
         {
             id: 2,
             title: "Workflows",
             description: "Automation for the event and event booking",
-            options: [
-                {
-                    id: 1,
-                    title: "Invitees Can Schedule, days in future",
-                    description:
-                        "Set a range of dates when you can accept meetings.",
-                    value: "1",
-                    type: "input",
-                    enabled: true,
-                },
-                {
-                    id: 2,
-                    title: "Your Availability Schedule",
-                    description:
-                        "Setup your availability schedule for the invitees to be able to book a meeting with you in your preferred schedule",
-                    value: "1",
-                    type: "input",
-                    enabled: true,
-                },
-                {
-                    id: 3,
-                    title: "Buffer Time before events",
-                    description: "Time to prepare for the booked events.",
-                    value: "1",
-                    type: "input",
-                    status: "disabled",
-                },
-                {
-                    id: 4,
-                    title: "Buffer Time after events",
-                    description: "Time to wrap-up after the booked events.",
-                    value: "1",
-                    type: "input",
-                    status: "disabled",
-                },
-            ],
-            enabled: true,
+            options: [],
+            enabled: false,
         },
         {
             id: 3,
