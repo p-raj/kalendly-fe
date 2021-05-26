@@ -93,6 +93,7 @@ class EventConfig extends Component {
                         <Select
                             className={"w-full"}
                             onChange={this.onMeetingDurationChange}
+                            defaultValue={this.state.data.event.duration}
                             defaultActiveFirstOption>
                             {options}
                         </Select>
@@ -115,7 +116,7 @@ class EventConfig extends Component {
                         <Switch
                             checkedChildren="Enabled"
                             unCheckedChildren="Disabled"
-                            checked
+                            defaultChecked
                         />
                     </div>
                 </div>
