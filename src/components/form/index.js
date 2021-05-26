@@ -12,7 +12,7 @@ const chooseElement = (elementType, elementOptions) => {
         id,
         value,
         description,
-        status,
+        enabled,
         options,
         validations,
     } = elementOptions;
@@ -21,23 +21,11 @@ const chooseElement = (elementType, elementOptions) => {
 
     switch (elementType) {
         case "input":
-            returnElement = (
-                <Input
-                    allowClear
-                    placeholder={description}
-                    defaultValue={value}
-                    id={id}
-                />
-            );
+            returnElement = <Input allowClear defaultValue={value} id={id} />;
             break;
         case "textarea":
             returnElement = (
-                <TextArea
-                    allowClear
-                    placeholder={description}
-                    defaultValue={value}
-                    id={id}
-                />
+                <TextArea allowClear defaultValue={value} id={id} />
             );
             break;
         case "radio":
@@ -46,7 +34,7 @@ const chooseElement = (elementType, elementOptions) => {
         case "select":
             returnElement = (
                 <Select
-                    status={status}
+                    enabled={enabled}
                     id={id}
                     options={options}
                     value={value}

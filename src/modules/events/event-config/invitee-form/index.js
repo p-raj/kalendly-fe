@@ -2,38 +2,36 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { v4 } from "uuid";
 
-import { Button, Select, Input } from "antd";
+import { Button, Select, Input, Row, Col } from "antd";
 const { Option } = Select;
 
 import { renderConfigElements } from "../utils";
 
 const SUPPORTED_FORM_ELEMENTS = [
-    { title: "Input", value: "input", render: Input },
+    { title: "Single Line Short Answers", value: "input" },
+    { title: "Multi Line Descriptive Answers", value: "textarea" },
 ];
 
 const InviteeForm = (props) => {
     const [isEditMode, setEditMode] = useState(false);
     const [formElements, setFormElements] = useState(props.elements);
     const [shouldPrepareNewElement, setPrepareNewElement] = useState(false);
-    const [newElement, setNewElement] = useState({ enabled: true });
+    const [newElement, setNewElement] = useState({
+        enabled: true,
+        type: "input",
+    });
 
     const toggleEditMode = () => {
         setEditMode(!isEditMode);
     };
 
-    const toggleShouldPrepareNewElement = () => {
-        setPrepareNewElement(!shouldPrepareNewElement);
-    };
-
     const saveNewElement = () => {
         setFormElements([...formElements, newElement]);
-        setNewElement({ enabled: true });
-        toggleEditMode();
-        toggleShouldPrepareNewElement();
+        setNewElement({ enabled: true, type: "input" });
     };
 
     const removeFormElement = (event) => {
-        const removeThisId = event.target.getAttribute("data-tag");
+        const removeThisId = event.currentTarget.getAttribute("data-tag");
         setFormElements([
             ...formElements.filter((element) => element.id != removeThisId),
         ]);
@@ -43,12 +41,14 @@ const InviteeForm = (props) => {
     // TODO - move to a dedicated module
     const renderAddNewElement = () => {
         return (
-            <>
-                <Button onClick={toggleEditMode}>{"Add"}</Button>
+            <div className={"grid grid-cols-2 gap-8"}>
+                <Button onClick={toggleEditMode}>
+                    {isEditMode ? "Done" : "Add"}
+                </Button>
                 {isEditMode ? (
                     <Button onClick={saveNewElement}>{"Save"}</Button>
                 ) : null}
-            </>
+            </div>
         );
     };
 
@@ -62,7 +62,8 @@ const InviteeForm = (props) => {
 
     const renderNewElementPlaceholder = () => {
         return (
-            <div>
+            <div className={"mt-4"}>
+                {"Select Form Input Type"}
                 <Select className={"w-full"} onChange={onSelectNewElement}>
                     {renderFormElementOptions()}
                 </Select>
@@ -79,13 +80,13 @@ const InviteeForm = (props) => {
     };
 
     const onSelectNewElement = (value) => {
-        toggleShouldPrepareNewElement();
+        setPrepareNewElement(true);
         setNewElement({ ...newElement, type: value, id: v4() });
     };
 
     const renderCaptureNewElementProperties = () => {
         return (
-            <>
+            <div className={"p-4 bg-gray-50"}>
                 {"Title"}
                 <Input
                     onChange={(e) => onChangeElementDescription(e, "title")}
@@ -98,7 +99,7 @@ const InviteeForm = (props) => {
                     }
                     value={newElement["description"]}
                 />
-            </>
+            </div>
         );
     };
     //
@@ -106,10 +107,18 @@ const InviteeForm = (props) => {
         <>
             {renderConfigElements(formElements, true, removeFormElement)}
             {renderAddNewElement()}
-            {isEditMode ? renderNewElementPlaceholder() : null}
-            {shouldPrepareNewElement
-                ? renderCaptureNewElementProperties()
-                : null}
+            <Row>
+                <Col span={24}>
+                    {isEditMode ? renderNewElementPlaceholder() : null}
+                </Col>
+            </Row>
+            <Row>
+                <Col span={24}>
+                    {shouldPrepareNewElement && isEditMode
+                        ? renderCaptureNewElementProperties()
+                        : null}
+                </Col>
+            </Row>
         </>
     );
 };

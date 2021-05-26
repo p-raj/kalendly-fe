@@ -6,7 +6,7 @@ import validationChecker from "./utils/validations";
 
 const { Option } = Select;
 
-const KSelect = ({ id, value, status, options, validations }) => {
+const KSelect = ({ id, value, enabled, options, validations }) => {
     const renderOptions = () => {
         return options.map((option) => (
             <Option key={option.key} value={option.value}>
@@ -27,7 +27,7 @@ const KSelect = ({ id, value, status, options, validations }) => {
             className={"w-full"}
             defaultValue={value}
             key={id}
-            disabled={status}
+            disabled={!enabled}
             onChange={onChange}>
             {renderOptions()}
         </Select>
@@ -37,7 +37,7 @@ const KSelect = ({ id, value, status, options, validations }) => {
 KSelect.propTypes = {
     id: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
-    status: PropTypes.string.isRequired,
+    enabled: PropTypes.bool.isRequired,
     options: PropTypes.array.isRequired,
     validations: PropTypes.array,
 };
