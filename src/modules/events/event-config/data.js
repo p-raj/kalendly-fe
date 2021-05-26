@@ -7,7 +7,7 @@ const data = {
         timezone: "America/New_York",
         duration: 15, // always in minutes
         meta: {},
-        status: "enabled",
+        enabled: true,
         locations: {
             plugins: [
                 {
@@ -26,7 +26,7 @@ const data = {
                     "Set a range of dates when you can accept meetings.",
                 value: 30 * MIN_TO_DAYS,
                 type: "select",
-                status: "enabled",
+                enabled: true,
                 options: [
                     { key: "30 Days", value: 30 * MIN_TO_DAYS },
                     { key: "60 Days", value: 60 * MIN_TO_DAYS },
@@ -67,7 +67,7 @@ const data = {
                     "Setup your availability schedule for the invitees to be able to book a meeting with you in your preferred schedule",
                 value: "1",
                 type: "input",
-                status: "enabled",
+                enabled: true,
             },
             {
                 id: 3,
@@ -75,7 +75,7 @@ const data = {
                 description: "Time to prepare for the booked events.",
                 value: 0,
                 type: "select",
-                status: "enabled",
+                enabled: true,
                 options: [
                     { key: "No Buffer", value: 0 },
                     { key: "15 Mins", value: 15 },
@@ -117,7 +117,7 @@ const data = {
                 description: "Time to wrap-up after the booked events.",
                 value: 0,
                 type: "select",
-                status: "enabled",
+                enabled: true,
                 options: [
                     { key: "No Buffer", value: 0 },
                     { key: "15 Mins", value: 15 },
@@ -159,6 +159,7 @@ const data = {
         {
             id: 1,
             title: "Invitee Form",
+            module: "invitee-form",
             description: "Event Booking Details to be filled by the invitees",
             options: [
                 {
@@ -168,7 +169,7 @@ const data = {
                         "Set a range of dates when you can accept meetings.",
                     value: "1",
                     type: "input",
-                    status: "enabled",
+                    enabled: true,
                 },
                 {
                     id: 2,
@@ -177,7 +178,7 @@ const data = {
                         "Setup your availability schedule for the invitees to be able to book a meeting with you in your preferred schedule",
                     value: "1",
                     type: "input",
-                    status: "enabled",
+                    enabled: true,
                 },
                 {
                     id: 3,
@@ -196,14 +197,49 @@ const data = {
                     status: "disabled",
                 },
             ],
-            status: "enabled",
+            enabled: true,
         },
         {
             id: 2,
             title: "Workflows",
             description: "Automation for the event and event booking",
-            options: [],
-            status: "disabled",
+            options: [
+                {
+                    id: 1,
+                    title: "Invitees Can Schedule, days in future",
+                    description:
+                        "Set a range of dates when you can accept meetings.",
+                    value: "1",
+                    type: "input",
+                    enabled: true,
+                },
+                {
+                    id: 2,
+                    title: "Your Availability Schedule",
+                    description:
+                        "Setup your availability schedule for the invitees to be able to book a meeting with you in your preferred schedule",
+                    value: "1",
+                    type: "input",
+                    enabled: true,
+                },
+                {
+                    id: 3,
+                    title: "Buffer Time before events",
+                    description: "Time to prepare for the booked events.",
+                    value: "1",
+                    type: "input",
+                    status: "disabled",
+                },
+                {
+                    id: 4,
+                    title: "Buffer Time after events",
+                    description: "Time to wrap-up after the booked events.",
+                    value: "1",
+                    type: "input",
+                    status: "disabled",
+                },
+            ],
+            enabled: true,
         },
         {
             id: 3,

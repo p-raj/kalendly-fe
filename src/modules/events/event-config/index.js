@@ -19,9 +19,12 @@ import { EditOutlined } from "@ant-design/icons";
 import { Editor } from "components/markdown";
 
 import data from "./data";
-import chooseElement from "components/form";
+import { renderConfigElements } from "./utils";
+import InviteeForm from "./invitee-form";
 
 const { Option } = Select;
+
+const CONFIG_PLUGIN_MODULE = { "invitee-form": InviteeForm };
 
 class EventConfig extends Component {
     state = {
@@ -30,13 +33,14 @@ class EventConfig extends Component {
             visible: false,
             title: "",
             elements: [],
+            pluginModule: null,
         },
     };
 
     renderTitle = (title) => {
         return (
             <div>
-                <h3>{"Event Title"}</h3>
+                <h1>{"Event Title"}</h1>
                 <Input value={title} />
             </div>
         );
@@ -45,7 +49,7 @@ class EventConfig extends Component {
     renderEditor = (description) => {
         return (
             <div>
-                <h3>{"Event Description"}</h3>
+                <h1>{"Event Description"}</h1>
                 <Editor value={description} />
             </div>
         );
@@ -54,7 +58,7 @@ class EventConfig extends Component {
     renderLocation = (location) => {
         return (
             <>
-                <h3>{"Event Location"}</h3>
+                <h1>{"Event Location"}</h1>
                 <Input value={location.title} />
             </>
         );
@@ -72,10 +76,10 @@ class EventConfig extends Component {
     renderActions = () => {
         const options = (
             <>
-                <Option value={15}>15 Minutes</Option>
-                <Option value={30}>30 Minutes</Option>
-                <Option value={45}>45 Minutes</Option>
-                <Option value={60}>60 Minutes</Option>
+                <Option value={15}>15 Mins</Option>
+                <Option value={30}>30 Mins</Option>
+                <Option value={45}>45 Mins</Option>
+                <Option value={60}>60 Mins</Option>
                 <Option value={null} disabled>
                     Custom Duration
                 </Option>
@@ -83,7 +87,7 @@ class EventConfig extends Component {
         );
         return (
             <>
-                <h3>{"Event Settings"}</h3>
+                <h1>{"Event Settings"}</h1>
                 <div className="grid grid-cols-5">
                     <div className="col-span-2">
                         <Select
@@ -107,7 +111,7 @@ class EventConfig extends Component {
                                 {"Open Live Page"}
                             </Link>
                         </p>
-                        <p>Event Status</p>
+                        <p>{"Event Status"}</p>
                         <Switch
                             checkedChildren="Enabled"
                             unCheckedChildren="Disabled"
@@ -119,30 +123,42 @@ class EventConfig extends Component {
         );
     };
 
-    renderConfigElements = (elements) => {
-        console.log(elements);
-        return elements.map((element, index) => (
-            <div key={index}>
-                {element.title}
-                {chooseElement(element.type, element)}
-                <Divider />
-            </div>
-        ));
+    renderConfigModule = () => {
+        const ConfigPluginModule =
+            CONFIG_PLUGIN_MODULE[this.state.configDrawer.pluginModule];
+        const elements = this.state.configDrawer.elements;
+        return (
+            <>
+                {ConfigPluginModule ? (
+                    <ConfigPluginModule elements={elements} />
+                ) : (
+                    renderConfigElements(elements)
+                )}
+            </>
+        );
     };
 
-    renderConfigCard = (id, title, description, options, status) => {
+    renderConfigCard = (
+        id,
+        title,
+        description,
+        options,
+        isEnabled,
+        pluginModule
+    ) => {
         return (
             <>
                 <Card
                     title={title}
                     extra={
-                        status === "enabled" ? (
+                        isEnabled ? (
                             <Button
                                 type={"link"}
                                 onClick={() =>
                                     this.onBeforeConfigDrawerOpen(
                                         title,
-                                        options
+                                        options,
+                                        pluginModule
                                     )
                                 }>
                                 <EditOutlined />
@@ -159,17 +175,18 @@ class EventConfig extends Component {
         );
     };
 
-    renderRules = (rules) => {
+    renderEventRuleConfigCard = (rules) => {
         return this.renderConfigCard(
             "rules",
             "Booking Rules",
             "Rules for the booking",
             rules,
-            "enabled"
+            true,
+            null
         );
     };
 
-    renderPlugins = (plugins) => {
+    renderEventPluginConfigCard = (plugins) => {
         return plugins.map((plugin, index) => (
             <div key={index}>
                 {this.renderConfigCard(
@@ -177,19 +194,22 @@ class EventConfig extends Component {
                     plugin.title,
                     plugin.description,
                     plugin.options,
-                    plugin.status
+                    plugin.enabled,
+                    plugin.module
                 )}
             </div>
         ));
     };
 
     // DRAWER
-    onBeforeConfigDrawerOpen = (title, elements) => {
+    onBeforeConfigDrawerOpen = (title, elements, configPluginModule) => {
+        console.log(elements, configPluginModule);
         this.setState(
             {
                 configDrawer: {
                     title: title,
                     elements: elements,
+                    pluginModule: configPluginModule,
                 },
             },
             () => {
@@ -206,6 +226,7 @@ class EventConfig extends Component {
                 visible: false,
                 title: "",
                 elements: [],
+                pluginModule: null,
             },
         });
     };
@@ -241,9 +262,11 @@ class EventConfig extends Component {
                 {/* Meeting Details */}
                 <Col xs={{ span: 24 }} md={{ span: 14 }}>
                     {/* Event Booking Rules */}
-                    {this.renderRules(this.state.data.event.rules)}
+                    {this.renderEventRuleConfigCard(
+                        this.state.data.event.rules
+                    )}
                     {/* Event Plugins */}
-                    {this.renderPlugins(this.state.data.plugins)}
+                    {this.renderEventPluginConfigCard(this.state.data.plugins)}
                     {/* Config Drawer */}
                     <Drawer
                         title={this.state.configDrawer.title}
@@ -261,9 +284,7 @@ class EventConfig extends Component {
                         closable={true}
                         onClose={this.onConfigDrawerClose}
                         visible={this.state.configDrawer.visible}>
-                        {this.renderConfigElements(
-                            this.state.configDrawer.elements
-                        )}
+                        {this.renderConfigModule()}
                     </Drawer>
                 </Col>
             </Row>

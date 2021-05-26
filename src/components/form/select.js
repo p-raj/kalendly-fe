@@ -27,7 +27,7 @@ const KSelect = ({ id, value, status, options, validations }) => {
             className={"w-full"}
             defaultValue={value}
             key={id}
-            disabled={status !== "enabled"}
+            disabled={status}
             onChange={onChange}>
             {renderOptions()}
         </Select>

@@ -42,7 +42,7 @@ body {
 }
 
 #content {
-    @apply hmax overflow-auto p-14 z-0 flex;
+    @apply hmax overflow-auto p-14 z-0;
 }
 
 /* Event Link Page */
