@@ -65,6 +65,7 @@ class EventLink extends Component {
     };
 
     componentDidMount = () => {
+        console.log(data);
         this.fetchData(this.state.selectedDate);
         // https://stackoverflow.com/questions/44480053/how-to-detect-if-screen-size-has-changed-to-mobile-in-react
         window.addEventListener("resize", this.updateWindowDimensions());

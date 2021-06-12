@@ -1,3 +1,9 @@
+import dayjs from "dayjs";
+var utc = require("dayjs/plugin/utc");
+dayjs.extend(utc);
+
+var now = dayjs().startOf("day");
+
 const data = {
     event: {
         title: "15 minutes meeting",
@@ -10,30 +16,48 @@ const data = {
         meta: {},
     },
     dates: {
-        "2021-05-06": {
+        [now.format("YYYY-MM-DD")]: {
             status: "available",
             availability: [
-                ["2021-05-06T03:30:00.000Z", "2021-05-06T12:59:59.999Z"],
+                [
+                    [now.add(15, "hours")],
+                    [now.add(1, "day").subtract(1, "second")],
+                ],
             ],
         },
-        "2021-05-07": {
+        [now.add(1, "day").format("YYYY-MM-DD")]: {
             status: "available",
             availability: [
-                ["2021-05-07T03:30:00.000Z", "2021-05-07T12:59:59.999Z"],
+                [
+                    [now.add(1, "day").add(7, "hours")],
+                    [now.add(2, "day").subtract(1, "second")],
+                ],
             ],
         },
-        "2021-05-08": {
+        [now.add(2, "day").format("YYYY-MM-DD")]: {
             status: "available",
             availability: [
-                ["2021-05-08T03:30:00.000Z", "2021-05-08T05:59:59.999Z"],
-                ["2021-05-08T07:30:00.000Z", "2021-05-08T09:59:59.999Z"],
-                ["2021-05-08T10:30:00.000Z", "2021-05-08T11:59:59.999Z"],
+                [
+                    [now.add(2, "day").add(3, "hours")],
+                    [now.add(2, "day").add(5, "hours")],
+                ],
+                [
+                    [now.add(2, "day").add(7, "hours")],
+                    [now.add(2, "day").add(9, "hours")],
+                ],
+                [
+                    [now.add(2, "day").add(20, "hours")],
+                    [now.add(2, "day").add(23, "hours")],
+                ],
             ],
         },
-        "2021-05-09": {
+        [now.add(3, "day").format("YYYY-MM-DD")]: {
             status: "available",
             availability: [
-                ["2021-05-09T03:30:00.000Z", "2021-05-09T23:59:59.999Z"],
+                [
+                    [now.add(3, "day").add(13, "hours")],
+                    [now.add(4, "day").subtract(1, "second")],
+                ],
             ],
         },
     },
