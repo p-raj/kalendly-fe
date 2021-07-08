@@ -11,28 +11,26 @@ function getListData(value) {
     switch (value.date()) {
         case 8:
             listData = [
-                { type: "warning", content: "This is warning event." },
-                { type: "success", content: "This is usual event." },
+                {
+                    type: "warning",
+                    content: "3",
+                },
             ];
             break;
         case 10:
             listData = [
-                { type: "warning", content: "This is warning event." },
-                { type: "success", content: "This is usual event." },
-                { type: "error", content: "This is error event." },
+                {
+                    type: "warning",
+                    content: "3",
+                },
             ];
             break;
         case 15:
             listData = [
-                { type: "warning", content: "This is warning event" },
                 {
-                    type: "success",
-                    content: "This is very long usual event。。....",
+                    type: "warning",
+                    content: "3",
                 },
-                { type: "error", content: "This is error event 1." },
-                { type: "error", content: "This is error event 2." },
-                { type: "error", content: "This is error event 3." },
-                { type: "error", content: "This is error event 4." },
             ];
             break;
         default:
@@ -46,7 +44,8 @@ function dateCellRender(value) {
         <ul className="events">
             {listData.map((item) => (
                 <li key={item.content}>
-                    <Badge status={item.type} text={item.content} />
+                    {"Meetings schudled: "}
+                    <b>{item.content}</b>
                 </li>
             ))}
         </ul>
@@ -76,9 +75,8 @@ const renderEventDates = (start, end) => {
     if (dayjs(start).get("date") === dayjs(end).get("date")) {
         return (
             <h3>
-                {dayjs(start).format(formatDate)}(
                 {dayjs(start).format(formatTime)} -
-                {dayjs(end).format(formatTime)})
+                {dayjs(end).format(formatTime)}
             </h3>
         );
     } else {
