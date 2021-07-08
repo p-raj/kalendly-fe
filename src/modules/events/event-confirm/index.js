@@ -207,7 +207,7 @@ class EventConfirmation extends Component {
                     <h1>{this.state.data.title}</h1>
                 </Col>
                 {/* General Details */}
-                <Col xs={{ span: 24 }} md={{ span: 10 }}>
+                <Col xs={{ span: 24 }} lg={{ span: 10 }}>
                     {/* Event Time */}
                     {this.renderTime(
                         this.state.data.dates.start,
@@ -226,7 +226,7 @@ class EventConfirmation extends Component {
                     <Divider />
                 </Col>
                 {/* Meeting Details */}
-                <Col xs={{ span: 24 }} md={{ span: 14 }} className={"bg-white"}>
+                <Col xs={{ span: 24 }} lg={{ span: 14 }} className={"bg-white"}>
                     {this.renderGuestDetails(this.state.data.guests)}
 
                     {/* GUEST LIST | Name, Email | Timezone | Status */}
