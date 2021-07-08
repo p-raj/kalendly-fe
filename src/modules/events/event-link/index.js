@@ -195,7 +195,7 @@ class EventLink extends Component {
     render() {
         return (
             <Row className={"justify-center"}>
-                <Col xs={{ span: 24 }} lg={{ span: 8 }}>
+                <Col xs={{ span: 24 }} lg={{ span: 16 }}>
                     <Row>
                         <Col xs={{ span: 24 }} lg={{ span: 8 }}>
                             <h1>{data.event.title}</h1>
