@@ -62,11 +62,6 @@ body {
     overflow-y: auto;
 }
 
-/* Calendar on the link page - CSS Props */
-#event-link-calendar-container .ant-picker-calendar-date-content {
-    @apply px-2 md:px-4 bg-white h-auto;
-}
-
 /* Animation to show Loading on button */
 /* @primary-color: #1890ff; */
 .animate-setup-api-call {

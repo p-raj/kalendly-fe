@@ -39,7 +39,6 @@ class EventLink extends Component {
         selectedDate: dayjs.utc(),
         availableSlots: [],
         selectedSlot: null,
-        showFullCalendar: false,
         preferredMeetingHours:
             dayjs().hour() < 12 ? MORNING_HOURS : EVENING_HOURS,
         visitorsTz: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -63,24 +62,6 @@ class EventLink extends Component {
             availableSlots: calcAvailableSlots.flat(),
         });
     };
-
-    componentDidMount = () => {
-        this.fetchData(this.state.selectedDate);
-        // https://stackoverflow.com/questions/44480053/how-to-detect-if-screen-size-has-changed-to-mobile-in-react
-        window.addEventListener("resize", this.updateWindowDimensions());
-    };
-    // https://stackoverflow.com/questions/44480053/how-to-detect-if-screen-size-has-changed-to-mobile-in-react
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.updateWindowDimensions);
-        // clearout any timers
-        if (this.apiTimer !== null) {
-            window.clearTimeout(this.apiTimer);
-        }
-    }
-    // https://stackoverflow.com/questions/44480053/how-to-detect-if-screen-size-has-changed-to-mobile-in-react
-    updateWindowDimensions() {
-        this.setState({ showFullCalendar: window.innerWidth > 768 });
-    }
 
     // LIST RELATED PROPERTIES & FUNCTIONS | TODO: move out as a separate component
     onDateSelect = (selectedDate) => {
@@ -213,47 +194,55 @@ class EventLink extends Component {
     // LIST RELATED PROPERTIES
     render() {
         return (
-            <Row gutter={{ xs: 0, md: 16 }}>
-                <Col xs={{ span: 24 }} md={{ span: 10 }}>
-                    <h1>{data.event.title}</h1>
-                    <h3>{data.event.duration} minutes</h3>
-                    {/* DIVIDER */}
-                    <Divider />
-                    <Viewer value={data.event.description} />
-                    {/* DIVIDER */}
-                    <Divider />
-                    <div
-                        className={
-                            data.event.timezone === this.state.visitorsTz
-                                ? "hidden"
-                                : "grid grid-flow-col grid-cols-2"
-                        }>
-                        <p>
-                            Your Timezone <br></br>
-                            {this.state.visitorsTz}
-                        </p>
-
-                        <p>
-                            Organizer&apos;s Timezone <br></br>
-                            {data.event.timezone}
-                        </p>
-                    </div>
-                </Col>
-                <Col xs={24} md={14} id="event-link-calendar-container">
-                    <Calendar
-                        fullscreen={this.state.showFullCalendar}
-                        defaultValue={dayjs.utc()}
-                        mode={"month"}
-                        value={this.selectedDate}
-                        onSelect={this.onDateSelect}
-                        validRange={[
-                            dayjs.utc().startOf("day"),
-                            dayjs.utc().endOf("month"),
-                        ]}
-                    />
-                    <Divider></Divider>
+            <Row className={"justify-center"}>
+                <Col xs={{ span: 24 }} lg={{ span: 8 }}>
                     <Row>
-                        <Col span={24} className={"bg-white px-4 md:my-0 my-4"}>
+                        <Col xs={{ span: 24 }} lg={{ span: 8 }}>
+                            <h1>{data.event.title}</h1>
+                            <h3>{data.event.duration} minutes</h3>
+                            {/* DIVIDER */}
+                            <Divider />
+                            <Viewer value={data.event.description} />
+                            {/* DIVIDER */}
+                            <Divider />
+                            <div
+                                className={
+                                    data.event.timezone ===
+                                    this.state.visitorsTz
+                                        ? "hidden"
+                                        : "grid grid-flow-col grid-cols-2"
+                                }>
+                                <p>
+                                    Your Timezone <br></br>
+                                    {this.state.visitorsTz}
+                                </p>
+
+                                <p>
+                                    Organizer&apos;s Timezone <br></br>
+                                    {data.event.timezone}
+                                </p>
+                            </div>
+                        </Col>
+                        <Col
+                            xs={{ span: 24 }}
+                            lg={{ span: 8 }}
+                            id="event-link-calendar-container">
+                            <Calendar
+                                fullscreen={false}
+                                defaultValue={dayjs.utc()}
+                                mode={"month"}
+                                value={this.selectedDate}
+                                onSelect={this.onDateSelect}
+                                validRange={[
+                                    dayjs.utc().startOf("day"),
+                                    dayjs.utc().endOf("month"),
+                                ]}
+                            />
+                        </Col>
+                        <Col
+                            xs={{ span: 24 }}
+                            lg={{ span: 8 }}
+                            className={"bg-white px-4 lg:my-0 my-4"}>
                             <List
                                 grid={{
                                     gutter: 16,
