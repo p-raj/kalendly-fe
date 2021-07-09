@@ -109,14 +109,14 @@ const renderEventCard = (item) => {
 const Home = () => {
     return (
         <Row className={"p-4 bg-white"}>
-            <Col md={18} xs={24}>
+            <Col lg={12} xs={24}>
                 <Calendar
                     dateCellRender={dateCellRender}
                     monthCellRender={monthCellRender}
                 />
             </Col>
             <Col
-                md={6}
+                lg={12}
                 xs={24}
                 className={
                     "overflow-y-auto overflow-x-hidden relative p-3 max-h-screen"

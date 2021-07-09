@@ -195,7 +195,7 @@ class EventLink extends Component {
     render() {
         return (
             <Row className={"justify-center"}>
-                <Col xs={{ span: 24 }} lg={{ span: 16 }}>
+                <Col>
                     <Row>
                         <Col xs={{ span: 24 }} lg={{ span: 8 }}>
                             <h1>{data.event.title}</h1>
@@ -223,41 +223,39 @@ class EventLink extends Component {
                                 </p>
                             </div>
                         </Col>
-                        <Col
-                            xs={{ span: 24 }}
-                            lg={{ span: 8 }}
-                            id="event-link-calendar-container">
-                            <Calendar
-                                fullscreen={false}
-                                defaultValue={dayjs.utc()}
-                                mode={"month"}
-                                value={this.selectedDate}
-                                onSelect={this.onDateSelect}
-                                validRange={[
-                                    dayjs.utc().startOf("day"),
-                                    dayjs.utc().endOf("month"),
-                                ]}
-                            />
-                        </Col>
-                        <Col
-                            xs={{ span: 24 }}
-                            lg={{ span: 8 }}
-                            className={"bg-white px-4 lg:my-0 my-4"}>
-                            <List
-                                grid={{
-                                    gutter: 16,
-                                    xs: 1,
-                                    sm: 2,
-                                    md: 4,
-                                    lg: 4,
-                                    xl: 6,
-                                }}
-                                id="event-link-slot-list"
-                                itemLayout="horizontal"
-                                dataSource={this.listDataSource()}
-                                header={this.renderListHeader()}
-                                renderItem={(item) => this.renderListItem(item)}
-                            />
+                        <Col xs={{ span: 24 }} lg={{ span: 16 }}>
+                            <Row className={"bg-white"}>
+                                <Col
+                                    xs={{ span: 24 }}
+                                    lg={{ span: 12 }}
+                                    id="event-link-calendar-container">
+                                    <Calendar
+                                        fullscreen={false}
+                                        defaultValue={dayjs.utc()}
+                                        mode={"month"}
+                                        value={this.selectedDate}
+                                        onSelect={this.onDateSelect}
+                                        validRange={[
+                                            dayjs.utc().startOf("day"),
+                                            dayjs.utc().endOf("month"),
+                                        ]}
+                                    />
+                                </Col>
+                                <Col
+                                    xs={{ span: 24 }}
+                                    lg={{ span: 12 }}
+                                    className={"px-4 lg:my-0 my-4"}>
+                                    <List
+                                        id="event-link-slot-list"
+                                        itemLayout="horizontal"
+                                        dataSource={this.listDataSource()}
+                                        header={this.renderListHeader()}
+                                        renderItem={(item) =>
+                                            this.renderListItem(item)
+                                        }
+                                    />
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
                 </Col>
