@@ -1,7 +1,7 @@
 // https://alampros.github.io/react-confetti/?path=/story/props-demos--knobs
 import React, { Component } from "react";
 import { Viewer } from "components/markdown";
-import { Row, Col, Button, Divider } from "antd";
+import { Row, Col, Divider } from "antd";
 
 import dayjs from "dayjs";
 var utc = require("dayjs/plugin/utc");
@@ -12,6 +12,9 @@ dayjs.extend(timezone);
 dayjs.extend(localizedFormat);
 
 import data from "./data";
+import GuestListHeaderDivider from "components/eventDetails/guestListHeaderDivider";
+import GuestList from "components/eventDetails/guestList";
+import EventActions from "components/eventDetails/eventActions";
 
 class EventConfirmation extends Component {
     state = {
@@ -114,90 +117,15 @@ class EventConfirmation extends Component {
     };
 
     renderEventActions = () => {
-        return (
-            <div className="grid grid-cols-5">
-                <div className="col-span-2">
-                    <Button block>{"Reschedule"}</Button>
-                </div>
-                {/* DIVIDER */}
-                <div className="col-span-1 block h-full w-1/2 border-t-0 border-b-0 border-l-0 border-gray-300 border-r border-solid"></div>
-                <div className="col-span-2">
-                    <Button block>{"Cancel"}</Button>
-                </div>
-            </div>
-        );
+        return <EventActions />;
     };
 
     renderDivider = () => {
-        return (
-            <div className="w-full border-gray-200 border-0 border-b border-solid"></div>
-        );
+        return <GuestListHeaderDivider />;
     };
 
     renderGuestDetails = (guestList) => {
-        const headers = {
-            name: "Name",
-            email: "Email",
-            timezone: "Timezome",
-            status: "Availability Status",
-        };
-
-        if (!this.state.smallScreen) {
-            return (
-                <>
-                    <div className="grid grid-cols-4 gap-4 px-16 py-10">
-                        <h3>{headers.name}</h3>
-                        <h3>{headers.email}</h3>
-                        <h3>{headers.timezone}</h3>
-                        <h3>{headers.status}</h3>
-                        {this.renderDivider()}
-                        {this.renderDivider()}
-                        {this.renderDivider()}
-                        {this.renderDivider()}
-                    </div>
-                    {guestList.map((guest, index) => {
-                        return (
-                            <div
-                                key={index}
-                                className="grid grid-cols-4 gap-4 px-16">
-                                <div>{guest.name}</div>
-                                <div>{guest.email}</div>
-                                <div>{guest.timezone}</div>
-                                <div>{guest.status}</div>
-                            </div>
-                        );
-                    })}
-                </>
-            );
-        } else {
-            return (
-                <>
-                    {guestList.map((guest, index) => {
-                        return (
-                            <div
-                                key={index}
-                                className="grid grid-cols-2 gap-4 px-4 py-4">
-                                {/* name */}
-                                <h3>{headers.name}</h3>
-                                <div>{guest.name}</div>
-                                {/* email */}
-                                <h3>{headers.email}</h3>
-                                <div>{guest.email}</div>
-                                {/* timezone */}
-                                <h3>{headers.timezone}</h3>
-                                <div>{guest.timezone}</div>
-                                {/* status */}
-                                <h3>{headers.status}</h3>
-                                <div>{guest.status}</div>
-                                {/* divider */}
-                                {this.renderDivider()}
-                                {this.renderDivider()}
-                            </div>
-                        );
-                    })}
-                </>
-            );
-        }
+        return <GuestList data={guestList} />;
     };
 
     render() {
